@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Marina Kotelnikov](https://up.htmlacademy.ru/react/7/user/967183).
-* Наставник: `Неизвестно`.
+* Наставник: [Марк Коваленко](https://htmlacademy.ru/profile/id1434381).
 
 ---
 
