@@ -10,11 +10,6 @@ import PlaceCardList from './placecard-list';
 function Homepage(props) {
   const {cityPlaceArray = [], offersArray} = props;
 
-  Homepage.propTypes = {
-    cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
-    offersArray: PropTypes.arrayOf(offerProp),
-  };
-
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -63,5 +58,10 @@ function Homepage(props) {
     </div>
   );
 }
+
+Homepage.propTypes = {
+  cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
+  offersArray: PropTypes.arrayOf(offerProp),
+};
 
 export default Homepage;

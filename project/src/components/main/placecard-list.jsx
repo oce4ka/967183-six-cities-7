@@ -7,10 +7,6 @@ function PlaceCardList(props) {
   const [placeCardActive, setPlaceCardActive] = useState(0);
   const {offersArray} = props;
 
-  PlaceCardList.propTypes = {
-    offersArray: PropTypes.arrayOf(offerProp),
-  };
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {offersArray.map((offer) => (
@@ -24,5 +20,9 @@ function PlaceCardList(props) {
     </div>
   );
 }
+
+PlaceCardList.propTypes = {
+  offersArray: PropTypes.arrayOf(offerProp),
+};
 
 export default PlaceCardList;

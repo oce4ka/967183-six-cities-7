@@ -6,20 +6,13 @@ import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import {useLocation} from 'react-router-dom';
 import PlaceCard from '../main/placecard';
-
 //import {useHistory} from 'react-router-dom';
 
 function Offer(props) {
   const {isUserLoggedIn = true, offersArray} = props;
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
   const offer = offersArray.filter((item) => item.id === currentOfferId)[0]; // get offer with the same id as in url
-
   //console.log(offer);
-
-  Offer.propTypes = {
-    isUserLoggedIn: PropTypes.bool,
-    offersArray: PropTypes.arrayOf(offerProp),
-  };
 
   return (
     <div className="page">
@@ -158,5 +151,10 @@ function Offer(props) {
     </div>
   );
 }
+
+Offer.propTypes = {
+  isUserLoggedIn: PropTypes.bool,
+  offersArray: PropTypes.arrayOf(offerProp),
+};
 
 export default Offer;

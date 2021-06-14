@@ -6,10 +6,6 @@ import PlaceCardInfo from '../main/placecard-info';
 function FavoritesItem(props) {
   const {offer} = props;
 
-  FavoritesItem.propTypes = {
-    offer: offerProp,
-  };
-
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -23,5 +19,9 @@ function FavoritesItem(props) {
     </article>
   );
 }
+
+FavoritesItem.propTypes = {
+  offer: offerProp,
+};
 
 export default FavoritesItem;

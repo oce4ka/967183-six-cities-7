@@ -6,10 +6,6 @@ import {Link} from 'react-router-dom';
 function PlaceCardInfo(props) {
   const {offer} = props;
 
-  PlaceCardInfo.propTypes = {
-    offer: offerProp,
-  };
-
   return (
     <React.Fragment>
       <div className="place-card__price-wrapper">
@@ -39,5 +35,9 @@ function PlaceCardInfo(props) {
     </React.Fragment>
   );
 }
+
+PlaceCardInfo.propTypes = {
+  offer: offerProp,
+};
 
 export default PlaceCardInfo;

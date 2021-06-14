@@ -11,14 +11,6 @@ import offerProp from '../offer/offer.prop';
 function App(props) {
   const {cityPlaceArray, offersArray} = props;
 
-  /* Todo: If I move it to the end it provides a error, why? */
-  App.propTypes = {
-    cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
-    offersArray: PropTypes.arrayOf(
-      offerProp.isRequired,
-    ),
-  };
-
   return (
     <BrowserRouter>
       <Switch>
@@ -55,5 +47,12 @@ function App(props) {
     </BrowserRouter>
   );
 }
+
+App.propTypes = {
+  cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
+  offersArray: PropTypes.arrayOf(
+    offerProp.isRequired,
+  ),
+};
 
 export default App;

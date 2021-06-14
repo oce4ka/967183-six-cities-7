@@ -7,11 +7,6 @@ import PlaceCardInfo from './placecard-info';
 function PlaceCard(props) {
   const {offer} = props;
 
-  PlaceCard.propTypes = {
-    offer: offerProp,
-    onMouseEnter: PropTypes.func,
-  };
-
   return (
     <article className="cities__place-card place-card" onMouseEnter={props.onMouseEnter}>
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
@@ -26,5 +21,10 @@ function PlaceCard(props) {
     </article>
   );
 }
+
+PlaceCard.propTypes = {
+  offer: offerProp,
+  onMouseEnter: PropTypes.func,
+};
 
 export default PlaceCard;

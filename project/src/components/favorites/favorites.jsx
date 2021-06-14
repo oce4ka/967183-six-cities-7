@@ -12,10 +12,6 @@ function Favorites(props) {
   const favoriteOffersArray = offersArray.filter((offerItem) => offerItem.isFavorite === true);
   const isFavoritesEmpty = !(favoriteOffersArray.length > 0);
 
-  Favorites.propTypes = {
-    offersArray: PropTypes.arrayOf(offerProp),
-  };
-
   return (
     <div className={isFavoritesEmpty ? 'page page--favorites-empty' : 'page'}>
       <Header/>
@@ -61,5 +57,9 @@ function FavoritesNotEmpty(props) {
     </main>
   );
 }
+
+Favorites.propTypes = {
+  offersArray: PropTypes.arrayOf(offerProp),
+};
 
 export default Favorites;

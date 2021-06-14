@@ -10,10 +10,6 @@ function FormReview(props) {
   });
   const {charsCount, textReview, starRaiting} = review;
 
-  FormReview.propTypes = {
-    onAnswer: PropTypes.func.isRequired,
-  };
-
   return (
     <form
       onSubmit={(evt) => {
@@ -97,5 +93,9 @@ function FormReview(props) {
     </form>
   );
 }
+
+FormReview.propTypes = {
+  onAnswer: PropTypes.func.isRequired,
+};
 
 export default FormReview;

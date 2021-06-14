@@ -5,10 +5,6 @@ import {Link} from 'react-router-dom';
 function Header(props) {
   const {isUserLoggedIn = false} = props;
 
-  Header.propTypes = {
-    isUserLoggedIn: PropTypes.bool,
-  };
-
   return (
     <header className="header">
       <div className="container">
@@ -55,5 +51,9 @@ function LoginEmail() {
     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
   );
 }
+
+Header.propTypes = {
+  isUserLoggedIn: PropTypes.bool,
+};
 
 export default Header;
