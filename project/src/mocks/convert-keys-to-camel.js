@@ -13,20 +13,20 @@ const checkIfObject = function (objectData) {
   return objectData === Object(objectData) && !checkIfArray(objectData) && typeof objectData !== 'function';
 };
 
-const keysToCamel = function (dataInSnake) {
+const convertKeysToCamel = function (dataInSnake) {
   if (checkIfObject(dataInSnake)) {
     const dataInCamel = {};
     Object.keys(dataInSnake)
       .forEach((k) => {
-        dataInCamel[toCamel(k)] = keysToCamel(dataInSnake[k]);
+        dataInCamel[toCamel(k)] = convertKeysToCamel(dataInSnake[k]);
       });
     return dataInCamel;
   } else if (checkIfArray(dataInSnake)) {
     return dataInSnake.map((i) =>
-      keysToCamel(i),
+      convertKeysToCamel(i),
     );
   }
   return dataInSnake;
 };
 
-export default keysToCamel;
+export default convertKeysToCamel;

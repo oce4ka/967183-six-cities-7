@@ -40,7 +40,7 @@ function Offer(props) {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.is_premium && <div className="property__mark"><span>Premium</span></div>}
+              {offer.isPremium && <div className="property__mark"><span>Premium</span></div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
@@ -70,7 +70,7 @@ function Offer(props) {
                   {offer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer.max_adults} adults
+                  Max {offer.maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -94,13 +94,13 @@ function Offer(props) {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={offer.host.avatar_url} width="74" height="74" alt={offer.host.name}/>
+                    <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt={offer.host.name}/>
                   </div>
                   <span className="property__user-name">
                     {offer.host.name}
                   </span>
                   <span className="property__user-status">
-                    {offer.host.is_pro ? 'Pro' : ''}
+                    {offer.host.isPro ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="property__description">
@@ -135,7 +135,10 @@ function Offer(props) {
                     </div>
                   </li>
                 </ul>
-                {isUserLoggedIn ? <FormReview/> : ''}
+                {isUserLoggedIn ?
+                  <FormReview onAnswer={() => {
+                  }}
+                  /> : ''}
               </section>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import convertKeysToCamel from './convert-keys-to-camel.js';
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const offers =
@@ -30,7 +31,7 @@ const offers =
         'zoom': 8,
       },
       'max_adults': 4,
-      'preview_image': 'img/1.png',
+      'preview_image': 'img/apartment-01.jpg',
       'price': 120,
       'rating': 4.5,
       'title': 'Beautiful & luxurious studio at great location',
@@ -51,12 +52,12 @@ const offers =
       'host': {
         'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
         'id': 3,
-        'is_pro': true,
-        'name': 'Angelina',
+        'is_pro': false,
+        'name': 'Angel',
       },
       'id': 2,
       'images': ['img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg?', 'img/apartment-03.jpg?', 'img/apartment-01.jpg?'],
-      'is_favorite': false,
+      'is_favorite': true,
       'is_premium': false,
       'location': {
         'latitude': 52.35514938496378,
@@ -64,7 +65,7 @@ const offers =
         'zoom': 8,
       },
       'max_adults': 4,
-      'preview_image': 'img/1.png',
+      'preview_image': 'img/apartment-02.jpg',
       'price': 80,
       'rating': 4.8,
       'title': 'Wood and stone place',
@@ -98,7 +99,7 @@ const offers =
         'zoom': 8,
       },
       'max_adults': 4,
-      'preview_image': 'img/1.png',
+      'preview_image': 'img/room.jpg',
       'price': 132,
       'rating': 3.8,
       'title': 'Canal View Prinsengracht',
@@ -106,4 +107,5 @@ const offers =
     },
   ];
 
-export default offers;
+/* Todo: Why bad? */
+export default convertKeysToCamel(offers);

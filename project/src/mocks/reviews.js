@@ -1,4 +1,6 @@
+import convertKeysToCamel from './convert-keys-to-camel.js';
 const AVATAR_URL = 'https://i.pravatar.cc/128';
+
 const reviews =
   [
     {
@@ -39,4 +41,5 @@ const reviews =
     },
   ];
 
-export default reviews;
+/* Todo: Why bad? */
+export default convertKeysToCamel(reviews);

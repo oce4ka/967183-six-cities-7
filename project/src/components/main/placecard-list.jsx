@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import PlaceCard from './placecard';
 
 function PlaceCardList(props) {
-  const [placeCardActive, setPlaceCardActive] = React.useState(0);
+  const [placeCardActive, setPlaceCardActive] = useState(0);
   const {offersArray} = props;
 
   PlaceCardList.propTypes = {

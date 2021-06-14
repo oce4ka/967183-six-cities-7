@@ -14,10 +14,10 @@ function PlaceCard(props) {
 
   return (
     <article className="cities__place-card place-card" onMouseEnter={props.onMouseEnter}>
-      {offer.is_premium && <div className="place-card__mark"><span>Premium</span></div>}
+      {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>
-          <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Beautiful &amp; luxurious apartment at great location"/>
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt={offer.title}/>
         </Link>
       </div>
       <div className="place-card__info">
