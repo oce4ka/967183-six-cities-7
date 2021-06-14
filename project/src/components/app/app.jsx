@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React from 'react';
 import Homepage from '../main/homepage';
 import PropTypes from 'prop-types';
@@ -8,16 +6,16 @@ import Login from '../login/login';
 import Offer from '../offer/offer';
 import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
+import offerProp from '../offer/offer.prop';
 
 function App(props) {
-  const {cityPlaceArray} = props;
+  const {cityPlaceArray, offersArray} = props;
 
+  /* Todo: If I move it to the end it provides a error, why? */
   App.propTypes = {
-    cityPlaceArray: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-      }),
+    cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
+    offersArray: PropTypes.arrayOf(
+      offerProp.isRequired,
     ),
   };
 
@@ -28,22 +26,27 @@ function App(props) {
           <Login/>
         </Route>
         <Route path="/favorites">
-          <Favorites/>
+          <Favorites offersArray={offersArray}/>
         </Route>
         <Route path="/offer/:id">
-          <Offer/>
+          <Offer offersArray={offersArray}/>
         </Route>
         <Route path="/" exact>
-          <Homepage cityPlaceArray={cityPlaceArray}/>
+          <Homepage
+            cityPlaceArray={cityPlaceArray}
+            offersArray={offersArray}
+          />
         </Route>
 
         {/* Just to make NavLinks - cities - work */}
-        <Route path="/Paris" component={Homepage}/>
-        <Route path="/Cologne" component={Homepage}/>
-        <Route path="/Brussels" component={Homepage}/>
-        <Route path="/Amsterdam" component={Homepage}/>
-        <Route path="/Hamburg" component={Homepage}/>
-        <Route path="/Dusseldorf" component={Homepage}/>
+        {cityPlaceArray.map((cityPlace) => (
+          <Route key={cityPlace} path={`/${cityPlace}`}>
+            <Homepage
+              cityPlaceArray={cityPlaceArray}
+              offersArray={offersArray}
+            />
+          </Route>
+        ))}
 
         <Route>
           <Page404/>
