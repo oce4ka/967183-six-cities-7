@@ -1,15 +1,17 @@
 /* eslint-disable no-console */
 import React from 'react';
-import Header from '../main/header';
+import Header from '../homepage/header';
 import FormReview from './form-review';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import {useLocation} from 'react-router-dom';
-import PlaceCard from '../main/placecard';
+import PlaceCard from '../homepage/placecard';
+import convertStarsToPercent from '../../utils/convert-start-to-percent';
 //import {useHistory} from 'react-router-dom';
 
 function Offer(props) {
   const {isUserLoggedIn = true, offersArray} = props;
+  /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
   const offer = offersArray.filter((item) => item.id === currentOfferId)[0]; // get offer with the same id as in url
   //console.log(offer);
@@ -48,7 +50,7 @@ function Offer(props) {
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
                   {/* Todo: bad? */}
-                  <span style={{width: `${offer.rating / 5 * 100}%`}}></span>
+                  <span style={{width: `${convertStarsToPercent(offer.rating)}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>

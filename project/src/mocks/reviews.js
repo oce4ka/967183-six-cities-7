@@ -1,4 +1,4 @@
-import convertKeysToCamel from './convert-keys-to-camel.js';
+import convertKeysToCamel from '../utils/convert-keys-to-camel.js';
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const reviews =

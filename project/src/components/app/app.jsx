@@ -1,5 +1,5 @@
 import React from 'react';
-import Homepage from '../main/homepage';
+import Homepage from '../homepage/homepage';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Login from '../login/login';
@@ -30,11 +30,11 @@ function App(props) {
           />
         </Route>
 
-        {/* Just to make NavLinks - cities - work */}
         {cityPlaceArray.map((cityPlace) => (
           <Route key={cityPlace} path={`/${cityPlace}`}>
             <Homepage
               cityPlaceArray={cityPlaceArray}
+              currentCity={cityPlace}
               offersArray={offersArray}
             />
           </Route>
@@ -51,7 +51,7 @@ function App(props) {
 App.propTypes = {
   cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
   offersArray: PropTypes.arrayOf(
-    offerProp.isRequired,
+    offerProp,
   ),
 };
 

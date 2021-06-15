@@ -8,7 +8,7 @@ function PlaceCard(props) {
   const {offer} = props;
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={props.onMouseEnter}>
+    <article className="cities__place-card place-card" onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>
@@ -25,6 +25,7 @@ function PlaceCard(props) {
 PlaceCard.propTypes = {
   offer: offerProp,
   onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
 };
 
 export default PlaceCard;

@@ -1,4 +1,4 @@
-import convertKeysToCamel from './convert-keys-to-camel.js';
+import convertKeysToCamel from '../utils/convert-keys-to-camel.js';
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const offers =
@@ -26,8 +26,8 @@ const offers =
       'is_favorite': false,
       'is_premium': true,
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
+        'latitude': 52.3909553943508,
+        'longitude': 4.85309666406198,
         'zoom': 8,
       },
       'max_adults': 4,
@@ -41,11 +41,11 @@ const offers =
       'bedrooms': 2,
       'city': {
         'location': {
-          'latitude': 50.370216,
-          'longitude': 8.895168,
+          'latitude': 52.370216,
+          'longitude': 4.895168,
           'zoom': 10,
         },
-        'name': 'Brussels',
+        'name': 'Amsterdam',
       },
       'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
       'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -60,8 +60,8 @@ const offers =
       'is_favorite': true,
       'is_premium': false,
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
+        'latitude': 52.369553943508,
+        'longitude': 4.85309666406198,
         'zoom': 8,
       },
       'max_adults': 4,
@@ -75,11 +75,11 @@ const offers =
       'bedrooms': 1,
       'city': {
         'location': {
-          'latitude': 47.370216,
-          'longitude': 10.895168,
+          'latitude': 52.370216,
+          'longitude': 4.895168,
           'zoom': 10,
         },
-        'name': 'Paris',
+        'name': 'Amsterdam',
       },
       'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
       'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -94,8 +94,42 @@ const offers =
       'is_favorite': false,
       'is_premium': false,
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
+        'latitude': 52.3909553943508,
+        'longitude': 4.929309666406198,
+        'zoom': 8,
+      },
+      'max_adults': 4,
+      'preview_image': 'img/room.jpg',
+      'price': 132,
+      'rating': 3.8,
+      'title': 'Canal View Prinsengracht',
+      'type': 'Apartment',
+    },
+    {
+      'bedrooms': 1,
+      'city': {
+        'location': {
+          'latitude': 52.370216,
+          'longitude': 4.895168,
+          'zoom': 10,
+        },
+        'name': 'Amsterdam',
+      },
+      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+      'host': {
+        'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+        'id': 3,
+        'is_pro': true,
+        'name': 'Angelina',
+      },
+      'id': 4,
+      'images': ['img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg?', 'img/apartment-03.jpg?', 'img/apartment-01.jpg?'],
+      'is_favorite': false,
+      'is_premium': false,
+      'location': {
+        'latitude': 52.3809553943508,
+        'longitude': 4.939309666406198,
         'zoom': 8,
       },
       'max_adults': 4,

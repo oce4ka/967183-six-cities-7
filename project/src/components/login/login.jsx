@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../main/header';
+import Header from '../homepage/header';
 
 function Login() {
   return (

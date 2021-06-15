@@ -1,7 +1,7 @@
 import React from 'react';
 import offerProp from '../offer/offer.prop';
 import {Link} from 'react-router-dom';
-import PlaceCardInfo from '../main/placecard-info';
+import PlaceCardInfo from '../homepage/placecard-info';
 
 function FavoritesItem(props) {
   const {offer} = props;

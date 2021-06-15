@@ -5,15 +5,13 @@ const toCamel = (stringData) =>
       .replace('_', ''),
   );
 
-const checkIfArray = function (arrayData) {
-  return Array.isArray(arrayData);
-};
+const checkIfArray = (arrayData) =>
+  Array.isArray(arrayData);
 
-const checkIfObject = function (objectData) {
-  return objectData === Object(objectData) && !checkIfArray(objectData) && typeof objectData !== 'function';
-};
+const checkIfObject = (objectData) =>
+  objectData === Object(objectData) && !checkIfArray(objectData) && typeof objectData !== 'function';
 
-const convertKeysToCamel = function (dataInSnake) {
+const convertKeysToCamel = (dataInSnake) => {
   if (checkIfObject(dataInSnake)) {
     const dataInCamel = {};
     Object.keys(dataInSnake)

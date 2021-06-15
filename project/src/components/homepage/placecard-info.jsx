@@ -2,6 +2,7 @@
 import React from 'react';
 import offerProp from '../offer/offer.prop';
 import {Link} from 'react-router-dom';
+import convertStarsToPercent from '../../utils/convert-start-to-percent';
 
 function PlaceCardInfo(props) {
   const {offer} = props;
@@ -23,8 +24,7 @@ function PlaceCardInfo(props) {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          {/* Todo: bad? */}
-          <span style={{width: `${offer.rating / 5 * 100}%`}}></span>
+          <span style={{width: `${convertStarsToPercent(offer.rating)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
