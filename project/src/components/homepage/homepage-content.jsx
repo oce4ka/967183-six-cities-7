@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import offerProp from './../offer/offer.prop';
 import Map from './map';
 
-function Cities(props) {
+function HomepageContent(props) {
   const {offersArray, currentCity = ''} = props;
   const [activePlaceId, setActivePlaceId] = useState(0);
 
@@ -44,9 +44,9 @@ function Cities(props) {
   );
 }
 
-Cities.propTypes = {
+HomepageContent.propTypes = {
   offersArray: PropTypes.arrayOf(offerProp),
   currentCity: PropTypes.string,
 };
 
-export default Cities;
+export default HomepageContent;

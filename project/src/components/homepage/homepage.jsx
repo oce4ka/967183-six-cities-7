@@ -3,7 +3,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from './header';
-import Cities from './cities';
+import HomepageContent from './homepage-content';
 import offerProp from './../offer/offer.prop';
 
 function Homepage(props) {
@@ -27,7 +27,7 @@ function Homepage(props) {
             </ul>
           </section>
         </div>
-        <Cities offersArray={offersArray} currentCity={currentCity}/>
+        <HomepageContent offersArray={offersArray} currentCity={currentCity}/>
       </main>
     </div>
   );
