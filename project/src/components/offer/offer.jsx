@@ -7,7 +7,8 @@ import offerProp from '../offer/offer.prop';
 import {useLocation} from 'react-router-dom';
 import PlaceCard from '../homepage/placecard';
 import convertStarsToPercent from '../../utils/convert-start-to-percent';
-//import {useHistory} from 'react-router-dom';
+import ReviewsList from './reviews-list';
+//import Map from '../homepage/map';
 
 function Offer(props) {
   const {isUserLoggedIn = true, offersArray} = props;
@@ -15,6 +16,9 @@ function Offer(props) {
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
   const offer = offersArray.filter((item) => item.id === currentOfferId)[0]; // get offer with the same id as in url
   //console.log(offer);
+  // For map:
+  //const currentCity = 'Amsterdam';
+  //const activePlaceId = currentOfferId;
 
   return (
     <div className="page">
@@ -105,38 +109,16 @@ function Offer(props) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
-                {isUserLoggedIn ?
-                  <FormReview onAnswer={() => {
+                <ReviewsList/>
+                {isUserLoggedIn &&
+                <FormReview
+                  onAnswer={() => {
                   }}
-                  /> : ''}
+                />}
               </section>
             </div>
           </div>
+          {/*<Map currentCity={currentCity} activePlaceId={activePlaceId} offersArray={offersArray}/>*/}
           <section className="property__map map"></section>
         </section>
         <div className="container">

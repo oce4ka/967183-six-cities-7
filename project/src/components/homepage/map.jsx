@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import SETTINGS, {CITIES} from '../../const';
 
 // Todo: ? import useMap from '../../hooks/use-map';
+// Todo: make HOC for Offer and Map
 
 const drawMapAnchors = (mapInstance, offersArray, currentOffer) => {
   const defaultCustomIcon = leaflet.icon({
