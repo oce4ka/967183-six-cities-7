@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import FavoritesEmpty from './favorites-empty';
 import offerProp from '../offer/offer.prop';
-import FavoritesCard from './favorites-card';
 import Page from './../app/page';
 import Main from './../app/main';
+import PlaceCardList from '../placecard/placecard-list';
 
 function Favorites(props) {
   const {offersArray} = props;
@@ -14,7 +14,7 @@ function Favorites(props) {
   const isFavoritesEmpty = !(favoriteOffersArray.length > 0);
 
   return (
-    <Page className={isFavoritesEmpty && 'page--favorites-empty'}>
+    <Page className={isFavoritesEmpty ? 'page--favorites-empty' : ''}>
       {isFavoritesEmpty ? <FavoritesEmpty/> : <FavoritesNotEmpty favoriteOffersArray={favoriteOffersArray}/>}
       <footer className={isFavoritesEmpty ? 'footer' : 'footer container'}>
 
@@ -28,10 +28,7 @@ function Favorites(props) {
 
 function FavoritesNotEmpty(props) {
   const {favoriteOffersArray} = props;
-
-  FavoritesNotEmpty.propTypes = {
-    favoriteOffersArray: PropTypes.arrayOf(offerProp),
-  };
+  const isFavorites = true;
 
   return (
     <Main className="page__main--favorites">
@@ -47,9 +44,7 @@ function FavoritesNotEmpty(props) {
                   </Link>
                 </div>
               </div>
-              <div className="favorites__places">
-                {favoriteOffersArray.map((offer) => (<FavoritesCard key={offer.id} offer={offer}/>))}
-              </div>
+              <PlaceCardList isFavorites={isFavorites} setActivePlace={() => void (0)} offersArray={favoriteOffersArray} className='favorites__places'/>
             </li>
           </ul>
         </section>
@@ -57,6 +52,10 @@ function FavoritesNotEmpty(props) {
     </Main>
   );
 }
+
+FavoritesNotEmpty.propTypes = {
+  favoriteOffersArray: PropTypes.arrayOf(offerProp),
+};
 
 Favorites.propTypes = {
   offersArray: PropTypes.arrayOf(offerProp),

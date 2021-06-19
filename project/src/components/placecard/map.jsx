@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, {useRef, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
@@ -6,7 +5,7 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Settings, {Cities} from '../../const';
 
-// Todo: ? import useMap from '../../hooks/use-map';
+// Todo: Hook? needed? import useMap from '../../hooks/use-map';
 // Todo: make HOC for Offer and Map
 
 const drawMapAnchors = (mapInstance, offersArray, currentOffer) => {
@@ -32,19 +31,19 @@ const drawMapAnchors = (mapInstance, offersArray, currentOffer) => {
 };
 
 function Map(props) {
-  const {offersArray, activePlaceId, currentCity = ''} = props;
+  const {className, offersArray, activePlaceId, currentCity = ''} = props;
   const currentOffer = offersArray.filter((offer) => (offer.id === activePlaceId))[0]; // get array with current offer only
   const mapRef = useRef(null);
   const [map, setMap] = useState(null); // keep map instance in state
 
   useEffect(() => { // init map
-    //console.log('componentDidMount');
     const city = Cities.filter((cityItem) => currentCity === cityItem.name)[0] || Cities[0];
+
     const mapInstance = leaflet.map(mapRef.current, {
       center: city.coords,
       zoom: city.zoom,
-      zoomControl: false,
-      marker: true,
+      zoomControl: false,  // Todo: read
+      marker: true, // Todo: read
     });
     mapInstance.setView(city.coords, city.zoom);
     leaflet
@@ -52,21 +51,21 @@ function Map(props) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       })
       .addTo(mapInstance);
-    drawMapAnchors(mapInstance, offersArray, null);
+    drawMapAnchors(mapInstance, offersArray, null); //draw inactive anchors
     setMap(mapInstance); // send map instance to state
   }, [offersArray, currentCity]);
 
   useEffect(() => {
-    //console.log('componentWillUpdate');
     map && drawMapAnchors(map, offersArray, currentOffer);
   }, [activePlaceId, currentOffer, map, offersArray]);
 
   return (
-    <section ref={mapRef} className="cities__map map"></section>
+    <section ref={mapRef} className={className}></section>
   );
 }
 
 Map.propTypes = {
+  className: PropTypes.string,
   offersArray: PropTypes.arrayOf(offerProp),
   activePlaceId: PropTypes.number.isRequired,
   currentCity: PropTypes.string,

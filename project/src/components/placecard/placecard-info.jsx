@@ -1,14 +1,15 @@
 /* eslint-disable no-console */
 import React from 'react';
+import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import {Link} from 'react-router-dom';
 import convertStarsToPercent from '../../utils/convert-stars-to-percent';
 
 function PlaceCardInfo(props) {
-  const {offer} = props;
+  const {offer, className = ''} = props;
 
   return (
-    <React.Fragment>
+    <div className={`place-card__info ${className}`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -32,12 +33,13 @@ function PlaceCardInfo(props) {
         <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
       </h2>
       <p className="place-card__type">{offer.type}</p>
-    </React.Fragment>
+    </div>
   );
 }
 
 PlaceCardInfo.propTypes = {
   offer: offerProp,
+  className: PropTypes.string,
 };
 
 export default PlaceCardInfo;

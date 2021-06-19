@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
 import React, {useState} from 'react';
-import PlaceCardList from './placecard-list';
+import PlaceCardList from '../placecard/placecard-list';
 import PropTypes from 'prop-types';
 import offerProp from './../offer/offer.prop';
-import Map from './map';
+import Map from '../placecard/map';
 
 function HomepageContent(props) {
   const {offersArray, currentCity = ''} = props;
   const [activePlaceId, setActivePlaceId] = useState(0);
+  const showPremium = true;
 
   const setActivePlace = (offerId) => {
     setActivePlaceId(offerId);
@@ -34,10 +35,10 @@ function HomepageContent(props) {
               <li className="places__option" tabIndex="0">Top rated first</li>
             </ul>
           </form>
-          <PlaceCardList setActivePlace={setActivePlace} offersArray={offersArray}/>
+          <PlaceCardList showPremium={showPremium} className='cities__places-list places__list tabs__content' setActivePlace={setActivePlace} offersArray={offersArray}/>
         </section>
         <div className="cities__right-section">
-          <Map currentCity={currentCity} activePlaceId={activePlaceId} offersArray={offersArray}/>
+          <Map className="cities__map map" currentCity={currentCity} activePlaceId={activePlaceId} offersArray={offersArray}/>
         </div>
       </div>
     </div>

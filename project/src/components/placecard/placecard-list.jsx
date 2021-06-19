@@ -4,17 +4,14 @@ import offerProp from '../offer/offer.prop';
 import PlaceCard from './placecard';
 
 function PlaceCardList(props) {
-  //const [placeCardActive, setPlaceCardActive] = useState(0);
-  const {offersArray, setActivePlace} = props;
+  const {offersArray, setActivePlace, className, ...restProps} = props;
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={className}>
       {offersArray.map((offer) => (
-        <PlaceCard key={offer.id} offer={offer} onMouseEnter={() => {
-          //setPlaceCardActive(offer.id);
+        <PlaceCard {...restProps} key={offer.id} offer={offer} onMouseEnter={() => {
           setActivePlace(offer.id);
         }} onMouseLeave={() => {
-          //setPlaceCardActive(offer.id);
           setActivePlace(0);
         }}
         />),
@@ -25,7 +22,10 @@ function PlaceCardList(props) {
 
 PlaceCardList.propTypes = {
   offersArray: PropTypes.arrayOf(offerProp),
-  setActivePlace: PropTypes.func.isRequired,
+  setActivePlace: PropTypes.func,
+  className: PropTypes.string,
+  isFavorites: PropTypes.bool,
+  showPremium: PropTypes.bool,
 };
 
 export default PlaceCardList;

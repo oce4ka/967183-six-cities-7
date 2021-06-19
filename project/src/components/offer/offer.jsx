@@ -1,32 +1,35 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React, {useState} from 'react';
 import FormReview from './form-review';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import {useLocation} from 'react-router-dom';
-import PlaceCard from '../homepage/placecard';
 import convertStarsToPercent from '../../utils/convert-stars-to-percent';
 import ReviewsList from './reviews-list';
 import {AppRoute} from '../../const';
 import {Redirect} from 'react-router-dom';
 import Page from './../app/page';
 import Main from './../app/main';
+import PlaceCardList from '../placecard/placecard-list';
+import Map from '../placecard/map';
 
 function Offer(props) {
   const {isUserLoggedIn = true, offersArray} = props;
+  const [activePlaceId, setActivePlaceId] = useState(0);
   /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
   /* Todo: what is the best option to get the object with object.id=XX in array of objects? */
   const offer = offersArray.filter((item) => item.id === currentOfferId)[0]; // get offer with the same id as in url
   if (offer === undefined) {
     return (
-      <Redirect to={AppRoute.PAGE404} />
+      <Redirect to={AppRoute.PAGE404}/>
     );
   }
-  //console.log(offer);
-  // For map:
-  //const currentCity = 'Amsterdam';
-  //const activePlaceId = currentOfferId;
+  const setActivePlace = (offerId) => {
+    setActivePlaceId(offerId);
+  };
+
+  console.log(activePlaceId);
 
   return (
     <Page>
@@ -124,17 +127,12 @@ function Offer(props) {
               </section>
             </div>
           </div>
-          {/*<Map currentCity={currentCity} activePlaceId={activePlaceId} offersArray={offersArray}/>*/}
-          <section className="property__map map"></section>
+          <Map className="property__map map" currentCity={offer.city.name} activePlaceId={activePlaceId} offersArray={offersArray}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {offersArray.map((relatedOffer) => (
-                <PlaceCard key={relatedOffer.id} offer={relatedOffer}/>),
-              )}
-            </div>
+            <PlaceCardList setActivePlace={setActivePlace} offersArray={offersArray} className="near-places__list places__list"/>
           </section>
         </div>
       </Main>
