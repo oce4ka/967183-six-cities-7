@@ -1,30 +1,36 @@
 /* eslint-disable no-console */
 import React from 'react';
-import Header from '../homepage/header';
 import FormReview from './form-review';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import {useLocation} from 'react-router-dom';
 import PlaceCard from '../homepage/placecard';
-import convertStarsToPercent from '../../utils/convert-start-to-percent';
+import convertStarsToPercent from '../../utils/convert-stars-to-percent';
 import ReviewsList from './reviews-list';
-//import Map from '../homepage/map';
+import {AppRoute} from '../../const';
+import {Redirect} from 'react-router-dom';
+import Page from './../app/page';
+import Main from './../app/main';
 
 function Offer(props) {
   const {isUserLoggedIn = true, offersArray} = props;
   /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
+  /* Todo: what is the best option to get the object with object.id=XX in array of objects? */
   const offer = offersArray.filter((item) => item.id === currentOfferId)[0]; // get offer with the same id as in url
+  if (offer === undefined) {
+    return (
+      <Redirect to={AppRoute.PAGE404} />
+    );
+  }
   //console.log(offer);
   // For map:
   //const currentCity = 'Amsterdam';
   //const activePlaceId = currentOfferId;
 
   return (
-    <div className="page">
-      <Header/>
-
-      <main className="page__main page__main--property">
+    <Page>
+      <Main className="page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
@@ -99,7 +105,7 @@ function Offer(props) {
                     {offer.host.name}
                   </span>
                   <span className="property__user-status">
-                    {offer.host.isPro ? 'Pro' : ''}
+                    {offer.host.isPro && 'Pro'}
                   </span>
                 </div>
                 <div className="property__description">
@@ -131,8 +137,8 @@ function Offer(props) {
             </div>
           </section>
         </div>
-      </main>
-    </div>
+      </Main>
+    </Page>
   );
 }
 

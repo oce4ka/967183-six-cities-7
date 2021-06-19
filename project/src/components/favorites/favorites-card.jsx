@@ -3,7 +3,7 @@ import offerProp from '../offer/offer.prop';
 import {Link} from 'react-router-dom';
 import PlaceCardInfo from '../homepage/placecard-info';
 
-function FavoritesItem(props) {
+function FavoritesCard(props) {
   const {offer} = props;
 
   return (
@@ -20,8 +20,8 @@ function FavoritesItem(props) {
   );
 }
 
-FavoritesItem.propTypes = {
+FavoritesCard.propTypes = {
   offer: offerProp,
 };
 
-export default FavoritesItem;
+export default FavoritesCard;

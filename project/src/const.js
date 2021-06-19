@@ -1,27 +1,29 @@
 /* Todo: to make refactoring and add APPROUTEs */
 
-export const SETTINGS = {
+export const Settings = {
   CITY_PLACES: ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'],
   URL_MARKER_DEFAULT: 'img/pin.svg',
   URL_MARKER_CURRENT: 'img/pin-active.svg',
 };
 
-export const APPROUTE = {
+export const AppRoute = {
   LOGIN: '/login',
-  LOSE: '/lose',
-  RESULT: '/result',
+  FAVORITES: '/favorites',
+  OFFER: '/offer/:id',
+  CITYPLACE: '/:cityplace',
   ROOT: '/',
-  DEV_ARTIST: '/dev-artist',
-  DEV_GENRE: '/dev-genre',
+  PAGE404: '/404',
 };
 
 /* Todo: camel case or uppercase in constants */
 
-export const CITIES = [
-  {name: 'Cologne', coords: [52.38333, 4.9], zoom: 12},
-  {name: 'Brussels', coords: [52.3909553943508, 4.85309666406198], zoom: 11},
-  {name: 'Paris', coords: [52.370216, 4.895168], zoom: 10},
+export const Cities = [
+  {name: 'Paris', coords: [48.85341, 2.3488], zoom: 10},
+  {name: 'Cologne', coords: [50.935173, 6.953101], zoom: 12},
+  {name: 'Brussels', coords: [50.85045, 4.34878], zoom: 11},
   {name: 'Amsterdam', coords: [52.38333, 4.9], zoom: 12},
+  {name: 'Hamburg', coords: [53.57532, 10.01534], zoom: 12},
+  {name: 'Dusseldorf', coords: [51.22172, 6.77616], zoom: 12},
 ];
 
-export default SETTINGS;
+export default Settings;

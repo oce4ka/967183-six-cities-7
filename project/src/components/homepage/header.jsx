@@ -21,7 +21,7 @@ function Header(props) {
                   {isUserLoggedIn ? <LoginEmail/> : <LoginLink/>}
                 </Link>
               </li>
-              {isUserLoggedIn ? <LogoutLink/> : ''}
+              {isUserLoggedIn && <LogoutLink/>}
             </ul>
           </nav>
         </div>

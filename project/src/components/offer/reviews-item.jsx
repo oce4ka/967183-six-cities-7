@@ -1,5 +1,5 @@
 import React from 'react';
-import convertStarsToPercent from '../../utils/convert-start-to-percent';
+import convertStarsToPercent from '../../utils/convert-stars-to-percent';
 import convertIsoDateToStrings from '../../utils/convert-iso-date-to-strings';
 import PropTypes from 'prop-types';
 import reviewProp from './review.prop';

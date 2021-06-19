@@ -1,8 +1,9 @@
 import React from 'react';
+import Main from './../app/main';
 
 function FavoritesEmpty() {
   return (
-    <main className="page__main page__main--favorites page__main--favorites-empty">
+    <Main className="page__main--favorites page__main--favorites-empty">
       <div className="page__favorites-container container">
         <section className="favorites favorites--empty">
           <h1 className="visually-hidden">Favorites (empty)</h1>
@@ -12,7 +13,7 @@ function FavoritesEmpty() {
           </div>
         </section>
       </div>
-    </main>
+    </Main>
   );
 }
 

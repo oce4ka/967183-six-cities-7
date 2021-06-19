@@ -2,7 +2,7 @@
 import React from 'react';
 import offerProp from '../offer/offer.prop';
 import {Link} from 'react-router-dom';
-import convertStarsToPercent from '../../utils/convert-start-to-percent';
+import convertStarsToPercent from '../../utils/convert-stars-to-percent';
 
 function PlaceCardInfo(props) {
   const {offer} = props;

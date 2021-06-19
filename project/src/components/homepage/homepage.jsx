@@ -2,18 +2,15 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Header from './header';
 import HomepageContent from './homepage-content';
 import offerProp from './../offer/offer.prop';
+import Page from './../app/page';
 
 function Homepage(props) {
   const {cityPlaceArray, offersArray = [], currentCity = ''} = props;
-  const isUserLoggedIn = true; //Todo: temporary
 
   return (
-    <div className="page page--gray page--main">
-      <Header isUserLoggedIn={isUserLoggedIn}/>
-
+    <Page className="page--gray page--main" {...props}>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -29,7 +26,7 @@ function Homepage(props) {
         </div>
         <HomepageContent offersArray={offersArray} currentCity={currentCity}/>
       </main>
-    </div>
+    </Page>
   );
 }
 

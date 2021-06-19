@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import SETTINGS, {CITIES} from '../../const';
+import Settings, {Cities} from '../../const';
 
 // Todo: ? import useMap from '../../hooks/use-map';
 // Todo: make HOC for Offer and Map
 
 const drawMapAnchors = (mapInstance, offersArray, currentOffer) => {
   const defaultCustomIcon = leaflet.icon({
-    iconUrl: SETTINGS.URL_MARKER_DEFAULT,
+    iconUrl: Settings.URL_MARKER_DEFAULT,
     iconSize: [27, 39],
   });
 
   const currentCustomIcon = leaflet.icon({
-    iconUrl: SETTINGS.URL_MARKER_CURRENT,
+    iconUrl: Settings.URL_MARKER_CURRENT,
     iconSize: [27, 39],
   });
 
@@ -39,7 +39,7 @@ function Map(props) {
 
   useEffect(() => { // init map
     //console.log('componentDidMount');
-    const city = CITIES.filter((cityItem) => currentCity === cityItem.name)[0] || CITIES[0];
+    const city = Cities.filter((cityItem) => currentCity === cityItem.name)[0] || Cities[0];
     const mapInstance = leaflet.map(mapRef.current, {
       center: city.coords,
       zoom: city.zoom,

@@ -1,12 +1,11 @@
 import React from 'react';
-import Header from '../homepage/header';
+import Page from './../app/page';
+import Main from './../app/main';
 
 function Login() {
   return (
-    <div className="page page--gray page--login">
-      <Header/>
-
-      <main className="page__main page__main--login">
+    <Page className="page--gray page--login">
+      <Main className="page__main--login">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
@@ -30,8 +29,8 @@ function Login() {
             </div>
           </section>
         </div>
-      </main>
-    </div>
+      </Main>
+    </Page>
   );
 }
 

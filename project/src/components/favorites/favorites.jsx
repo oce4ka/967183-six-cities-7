@@ -2,10 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import Header from '../homepage/header';
 import FavoritesEmpty from './favorites-empty';
 import offerProp from '../offer/offer.prop';
-import FavoritesItem from './favorites-item';
+import FavoritesCard from './favorites-card';
+import Page from './../app/page';
+import Main from './../app/main';
 
 function Favorites(props) {
   const {offersArray} = props;
@@ -13,16 +14,15 @@ function Favorites(props) {
   const isFavoritesEmpty = !(favoriteOffersArray.length > 0);
 
   return (
-    <div className={isFavoritesEmpty ? 'page page--favorites-empty' : 'page'}>
-      <Header/>
-
+    <Page className={isFavoritesEmpty && 'page--favorites-empty'}>
       {isFavoritesEmpty ? <FavoritesEmpty/> : <FavoritesNotEmpty favoriteOffersArray={favoriteOffersArray}/>}
       <footer className={isFavoritesEmpty ? 'footer' : 'footer container'}>
+
         <a className="footer__logo-link" href="main.html">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
         </a>
       </footer>
-    </div>
+    </Page>
   );
 }
 
@@ -34,7 +34,7 @@ function FavoritesNotEmpty(props) {
   };
 
   return (
-    <main className="page__main page__main--favorites">
+    <Main className="page__main--favorites">
       <div className="page__favorites-container container">
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
@@ -48,13 +48,13 @@ function FavoritesNotEmpty(props) {
                 </div>
               </div>
               <div className="favorites__places">
-                {favoriteOffersArray.map((offer) => (<FavoritesItem key={offer.id} offer={offer}/>))}
+                {favoriteOffersArray.map((offer) => (<FavoritesCard key={offer.id} offer={offer}/>))}
               </div>
             </li>
           </ul>
         </section>
       </div>
-    </main>
+    </Main>
   );
 }
 
