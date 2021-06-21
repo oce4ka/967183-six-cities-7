@@ -10,12 +10,13 @@ import {AppRoute} from '../../const';
 import {Redirect} from 'react-router-dom';
 import Page from './../app/page';
 import Main from './../app/main';
-import PlaceCardList from '../placecard/placecard-list';
+import PlaceCardsList from '../placecard/placecards-list';
 import Map from '../placecard/map';
 
 function Offer(props) {
   const {isUserLoggedIn = true, offersArray} = props;
   const [activePlaceId, setActivePlaceId] = useState(0);
+  const [activeMarkerId, setActiveMarkerId] = useState(0);
   /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
   /* Todo: what is the best option to get the object with object.id=XX in array of objects? */
@@ -25,11 +26,14 @@ function Offer(props) {
       <Redirect to={AppRoute.PAGE404}/>
     );
   }
+
   const setActivePlace = (offerId) => {
     setActivePlaceId(offerId);
   };
 
-  console.log(activePlaceId);
+  const setActiveMarker = (offerId) => {
+    setActiveMarkerId(offerId);
+  };
 
   return (
     <Page>
@@ -127,12 +131,23 @@ function Offer(props) {
               </section>
             </div>
           </div>
-          <Map className="property__map map" currentCity={offer.city.name} activePlaceId={activePlaceId} offersArray={offersArray}/>
+          <Map
+            className="property__map map"
+            setActiveMarker={setActiveMarker}
+            activePlaceId={activePlaceId}
+            offersArray={offersArray}
+            currentCity={offer.city.name}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardList setActivePlace={setActivePlace} offersArray={offersArray} className="near-places__list places__list"/>
+            <PlaceCardsList
+              className="near-places__list places__list"
+              setActivePlace={setActivePlace}
+              activeMarkerId={activeMarkerId}
+              offersArray={offersArray}
+            />
           </section>
         </div>
       </Main>

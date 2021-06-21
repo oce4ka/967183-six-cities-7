@@ -4,7 +4,7 @@ import convertIsoDateToStrings from '../../utils/convert-iso-date-to-strings';
 import PropTypes from 'prop-types';
 import reviewProp from './review.prop';
 
-function ReviewsItem(props) {
+function ReviewItem(props) {
   const {reviewsItem} = props;
 
   return (
@@ -31,8 +31,8 @@ function ReviewsItem(props) {
   );
 }
 
-ReviewsItem.propTypes = {
+ReviewItem.propTypes = {
   reviewsItem: PropTypes.shape(reviewProp),
 };
 
-export default ReviewsItem;
+export default ReviewItem;

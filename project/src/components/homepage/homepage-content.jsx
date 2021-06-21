@@ -1,17 +1,22 @@
 /* eslint-disable no-console */
 import React, {useState} from 'react';
-import PlaceCardList from '../placecard/placecard-list';
+import PlaceCardsList from '../placecard/placecards-list';
 import PropTypes from 'prop-types';
 import offerProp from './../offer/offer.prop';
 import Map from '../placecard/map';
 
 function HomepageContent(props) {
-  const {offersArray, currentCity = ''} = props;
+  const {offersArray, currentCity} = props;
   const [activePlaceId, setActivePlaceId] = useState(0);
+  const [activeMarkerId, setActiveMarkerId] = useState(0);
   const showPremium = true;
 
   const setActivePlace = (offerId) => {
     setActivePlaceId(offerId);
+  };
+
+  const setActiveMarker = (offerId) => {
+    setActiveMarkerId(offerId);
   };
 
   return (
@@ -35,10 +40,24 @@ function HomepageContent(props) {
               <li className="places__option" tabIndex="0">Top rated first</li>
             </ul>
           </form>
-          <PlaceCardList showPremium={showPremium} className='cities__places-list places__list tabs__content' setActivePlace={setActivePlace} offersArray={offersArray}/>
+          <PlaceCardsList
+            className='cities__places-list places__list tabs__content'
+            setActivePlace={setActivePlace}
+            activeMarkerId={activeMarkerId}
+            offersArray={offersArray}
+            showPremium={showPremium}
+          />
         </section>
         <div className="cities__right-section">
-          <Map className="cities__map map" currentCity={currentCity} activePlaceId={activePlaceId} offersArray={offersArray}/>
+          {
+            <Map
+              className="cities__map map"
+              setActiveMarker={setActiveMarker}
+              activePlaceId={activePlaceId}
+              offersArray={offersArray}
+              currentCity={currentCity}
+            />
+          }
         </div>
       </div>
     </div>
@@ -47,7 +66,7 @@ function HomepageContent(props) {
 
 HomepageContent.propTypes = {
   offersArray: PropTypes.arrayOf(offerProp),
-  currentCity: PropTypes.string,
+  currentCity: PropTypes.string.isRequired,
 };
 
 export default HomepageContent;

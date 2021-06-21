@@ -139,6 +139,40 @@ const offers =
       'title': 'Canal View Prinsengracht',
       'type': 'Apartment',
     },
+    {
+      'bedrooms': 1,
+      'city': {
+        'location': {
+          'latitude': 48.85341,
+          'longitude': 2.3488,
+          'zoom': 10,
+        },
+        'name': 'Paris',
+      },
+      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+      'host': {
+        'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+        'id': 3,
+        'is_pro': true,
+        'name': 'Angelina',
+      },
+      'id': 5,
+      'images': ['img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg?', 'img/apartment-03.jpg?', 'img/apartment-01.jpg?'],
+      'is_favorite': false,
+      'is_premium': false,
+      'location': {
+        'latitude': 48.885706,
+        'longitude': 2.2757816,
+        'zoom': 8,
+      },
+      'max_adults': 4,
+      'preview_image': 'img/room.jpg',
+      'price': 132,
+      'rating': 3.8,
+      'title': 'Canal View Prinsengracht',
+      'type': 'Apartment',
+    },
   ];
 
 /* Todo: Why bad? */

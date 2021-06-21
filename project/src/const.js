@@ -1,7 +1,8 @@
-/* Todo: to make refactoring and add APPROUTEs */
+/* Todo: to make refactoring and add AppRoutes */
 
 export const Settings = {
   CITY_PLACES: ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'],
+  DEFAULT_CITY: 'Paris',
   URL_MARKER_DEFAULT: 'img/pin.svg',
   URL_MARKER_CURRENT: 'img/pin-active.svg',
 };

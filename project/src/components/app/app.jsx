@@ -27,20 +27,8 @@ function App(props) {
         <Route path={AppRoute.ROOT} exact>
           <Homepage
             cityPlaceArray={cityPlaceArray}
-            offersArray={offersArray}
           />
         </Route>
-
-        {cityPlaceArray.map((cityPlace) => (
-          <Route key={cityPlace} path={`/${cityPlace}`}>
-            <Homepage
-              cityPlaceArray={cityPlaceArray}
-              currentCity={cityPlace}
-              offersArray={offersArray}
-            />
-          </Route>
-        ))}
-
         <Route>
           <Page404/>
         </Route>

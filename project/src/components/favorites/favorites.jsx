@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
@@ -6,7 +5,7 @@ import FavoritesEmpty from './favorites-empty';
 import offerProp from '../offer/offer.prop';
 import Page from './../app/page';
 import Main from './../app/main';
-import PlaceCardList from '../placecard/placecard-list';
+import PlaceCardsList from '../placecard/placecards-list';
 
 function Favorites(props) {
   const {offersArray} = props;
@@ -17,10 +16,9 @@ function Favorites(props) {
     <Page className={isFavoritesEmpty ? 'page--favorites-empty' : ''}>
       {isFavoritesEmpty ? <FavoritesEmpty/> : <FavoritesNotEmpty favoriteOffersArray={favoriteOffersArray}/>}
       <footer className={isFavoritesEmpty ? 'footer' : 'footer container'}>
-
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to="/">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
+        </Link>
       </footer>
     </Page>
   );
@@ -39,12 +37,13 @@ function FavoritesNotEmpty(props) {
             <li className="favorites__locations-items">
               <div className="favorites__locations locations locations--current">
                 <div className="locations__item">
-                  <Link className="locations__item-link" to='/Amsterdam'>
+                  <Link className="locations__item-link" to='/'>
                     <span>Amsterdam</span>
+                    {/* Todo: onclick change state.city */}
                   </Link>
                 </div>
               </div>
-              <PlaceCardList isFavorites={isFavorites} setActivePlace={() => void (0)} offersArray={favoriteOffersArray} className='favorites__places'/>
+              <PlaceCardsList isFavorites={isFavorites} setActivePlace={() => void (0)} offersArray={favoriteOffersArray} className='favorites__places'/>
             </li>
           </ul>
         </section>
