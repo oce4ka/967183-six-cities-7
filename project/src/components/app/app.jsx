@@ -1,6 +1,7 @@
 import React from 'react';
 import Homepage from '../homepage/homepage';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Login from '../login/login';
 import Offer from '../offer/offer';
@@ -8,9 +9,17 @@ import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
 import offerProp from '../offer/offer.prop';
 import {AppRoute} from '../../const';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {isCheckedAuth} from '../homepage/homepage-content';
 
 function App(props) {
-  const {cityPlaceArray, offersArray} = props;
+  const {cityPlaceArray, offersArray, authorizationStatus, isDataLoaded} = props;
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -42,6 +51,14 @@ App.propTypes = {
   offersArray: PropTypes.arrayOf(
     offerProp,
   ),
+  authorizationStatus: PropTypes.string.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  isDataLoaded: state.isDataLoaded,
+});
+
+export {App};
+export default connect(mapStateToProps, null)(App);

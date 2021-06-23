@@ -4,6 +4,7 @@ import PlaceCardsList from '../placecard/placecards-list';
 import PropTypes from 'prop-types';
 import offerProp from './../offer/offer.prop';
 import Map from '../placecard/map';
+import {AuthorizationStatus} from './../../const';
 
 function HomepageContent(props) {
   const {offersArray, currentCity} = props;
@@ -68,5 +69,8 @@ HomepageContent.propTypes = {
   offersArray: PropTypes.arrayOf(offerProp),
   currentCity: PropTypes.string.isRequired,
 };
+
+export const isCheckedAuth = (authorizationStatus) =>
+  authorizationStatus === AuthorizationStatus.UNKNOWN;
 
 export default HomepageContent;

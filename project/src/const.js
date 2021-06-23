@@ -14,6 +14,7 @@ export const AppRoute = {
   CITYPLACE: '/:cityplace',
   ROOT: '/',
   PAGE404: '/404',
+  LOGOUT: '/logout',
 };
 
 /* Todo: camel case or uppercase in constants */
@@ -26,5 +27,11 @@ export const Cities = [
   {name: 'Hamburg', coords: [53.57532, 10.01534], zoom: 12},
   {name: 'Dusseldorf', coords: [51.22172, 6.77616], zoom: 12},
 ];
+
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
 
 export default Settings;
