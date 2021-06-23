@@ -16,6 +16,12 @@ export const AppRoute = {
   PAGE404: '/404',
 };
 
+export const APIRoute = {
+  OFFERS: '/hotels',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
+
 /* Todo: camel case or uppercase in constants */
 
 export const Cities = [

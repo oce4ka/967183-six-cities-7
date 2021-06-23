@@ -4,19 +4,21 @@ import PropTypes from 'prop-types';
 import HomepageContent from './homepage-content';
 import offerProp from './../offer/offer.prop';
 import Page from './../app/page';
-import {ActionCreator} from '../../store/action';
 import Main from '../app/main';
 import CitiesList from './cities-list';
+import {ActionCreator} from '../../store/action';
+import convertKeysToCamel from '../../utils/convert-keys-to-camel';
 
 function Homepage(props) {
   const {cityPlaceArray, offersArray = [], currentCity = '', onChangeCity} = props;
+  //let offersArrayByCity = [];
 
   return (
     <Page className="page--gray page--main" {...props}>
       <Main className="page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList onChangeCity={onChangeCity} cityPlaceArray={cityPlaceArray} currentCity={currentCity}/>
-        <HomepageContent offersArray={offersArray} currentCity={currentCity}/>
+        <HomepageContent offersArray={offersArray.filter((offer) => (offer.city.name === currentCity))} currentCity={currentCity}/>
       </Main>
     </Page>
   );
@@ -31,19 +33,17 @@ Homepage.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentCity: state.city,
-  offersArray: state.offers,
+  offersArray: convertKeysToCamel(state.offers),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeCity(city) {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.showOffers());
+    //dispatch(ActionCreator.loadOffers());
   },
-  /*
-  showOffers() {
-    dispatch(ActionCreator.showOffers());
+  loadOffers() {
+    dispatch(ActionCreator.loadOffers());
   },
-  */
 });
 
 export {Homepage};
