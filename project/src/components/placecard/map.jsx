@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, {useRef, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
@@ -9,25 +8,29 @@ import Settings, {Cities} from '../../const';
 // Todo: Hook? needed? import useMap from '../../hooks/use-map';
 // Todo: make HOC for Offer and Map - no need
 
+let currentMarkerFromHoveredPlaceCard;
 const drawMapAnchors = (map, offersArray, currentOffer, setActiveMarker) => {
   const defaultCustomIcon = leaflet.icon({
     iconUrl: Settings.URL_MARKER_DEFAULT,
     iconSize: [27, 39],
   });
-
   const currentCustomIcon = leaflet.icon({
     iconUrl: Settings.URL_MARKER_CURRENT,
     iconSize: [27, 39],
   });
+  let hasHoveredPlaceCard = false;
 
   offersArray.forEach((offer) => {
     if (currentOffer && (offer.id === currentOffer.id)) {
-      leaflet
-        .marker([offer.location.latitude, offer.location.longitude], {icon: currentCustomIcon, riseOnHover: true})
-        .addTo(map);
+      currentMarkerFromHoveredPlaceCard && map.removeLayer(currentMarkerFromHoveredPlaceCard);
+      currentMarkerFromHoveredPlaceCard =
+        leaflet
+          .marker([offer.location.latitude, offer.location.longitude], {icon: currentCustomIcon, zIndexOffset: 9999});
+      currentMarkerFromHoveredPlaceCard.addTo(map);
+      hasHoveredPlaceCard = true;
     } else {
       const marker = leaflet
-        .marker([offer.location.latitude, offer.location.longitude], {icon: defaultCustomIcon, riseOnHover: true});
+        .marker([offer.location.latitude, offer.location.longitude], {icon: defaultCustomIcon, riseOnHover: true, opacity: 1});
       marker.on('mouseover', () => {
         setActiveMarker(offer.id);
         marker.setIcon(currentCustomIcon);
@@ -38,6 +41,7 @@ const drawMapAnchors = (map, offersArray, currentOffer, setActiveMarker) => {
       });
       marker.addTo(map);
     }
+    !hasHoveredPlaceCard && currentMarkerFromHoveredPlaceCard && map.removeLayer(currentMarkerFromHoveredPlaceCard);
   });
 };
 
@@ -47,8 +51,6 @@ function Map(props) {
   const currentOffer = offersArray.filter((offer) => (offer.id === activePlaceId))[0]; // get array with current offer only
   const mapRef = useRef(null);
   const [map, setMap] = useState(null); // keep map instance in state
-
-  console.log(currentOffer);
 
   useEffect(() => { // init map
     const city = Cities.filter((cityItem) => currentCity === cityItem.name)[0] || Cities[0];
@@ -65,7 +67,8 @@ function Map(props) {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         })
         .addTo(mapInstance);
-      drawMapAnchors(mapInstance, offersArray, null); //draw inactive anchors
+      //drawMapAnchors(mapInstance, offersArray, null); //draw inactive anchors
+      //if (currentMarkerFromHoveredPlaceCard) {map.removeLayer(currentMarkerFromHoveredPlaceCard);}
       setMap(mapInstance); // send map instance to state
     } else {
       map.flyTo(city.coords);
