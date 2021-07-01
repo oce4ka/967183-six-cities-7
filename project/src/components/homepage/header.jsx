@@ -1,9 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {isUserLoggedIn} from '../../utils/check-auth';
+import {logout} from '../../store/api-actions';
 
 function Header(props) {
-  const {isUserLoggedIn = false} = props;
+  const {authorizationStatus, onLogOut, email = ''} = props;
+
+  const handleLogOut = (evt) => {
+    evt.preventDefault();
+    onLogOut();
+  };
 
   return (
     <header className="header">
@@ -18,10 +26,22 @@ function Header(props) {
                 <Link to="/login" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  {isUserLoggedIn ? <LoginEmail/> : <LoginLink/>}
+                  {
+                    isUserLoggedIn(authorizationStatus) ?
+                      <span className="header__user-name user__name">{email}</span> :
+                      <span className="header__login">Sign in</span>
+                  }
                 </Link>
               </li>
-              {isUserLoggedIn && <LogoutLink/>}
+              {
+                isUserLoggedIn(authorizationStatus)
+                &&
+                <li className="header__nav-item">
+                  <Link className="header__nav-link" onClick={handleLogOut} to="/logout">
+                    <span className="header__signout">Sign out</span>
+                  </Link>
+                </li>
+              }
             </ul>
           </nav>
         </div>
@@ -30,30 +50,24 @@ function Header(props) {
   );
 }
 
-function LogoutLink() {
-  return (
-    <li className="header__nav-item">
-      <Link className="header__nav-link" to="/logout">
-        <span className="header__signout">Sign out</span>
-      </Link>
-    </li>
-  );
-}
-
-function LoginLink() {
-  return (
-    <span className="header__login">Sign in</span>
-  );
-}
-
-function LoginEmail() {
-  return (
-    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-  );
-}
 
 Header.propTypes = {
-  isUserLoggedIn: PropTypes.bool,
+  //isUserLoggedIn: PropTypes.bool,
+  authorizationStatus: PropTypes.string.isRequired,
+  onLogOut: PropTypes.func.isRequired,
+  email: PropTypes.string,
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  email: state.authInfo.email,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLogOut() {
+    dispatch(logout());
+  },
+});
+
+export {Header};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

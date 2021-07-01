@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function Page(props) {
   return (
     <div className={`page ${props.className}`}>
-      <Header isUserLoggedIn={props.isUserLoggedIn}/>
+      <Header/>
       {props.children}
     </div>
   );
@@ -13,7 +13,6 @@ function Page(props) {
 
 Page.propTypes = {
   className: PropTypes.string,
-  isUserLoggedIn: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 

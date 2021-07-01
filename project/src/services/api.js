@@ -1,9 +1,14 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 /* Todo: resolve errors with unused vars? which are needed actually */
 import axios from 'axios';
 
 const BACKEND_URL = 'https://7.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
+
+const HttpCode = {
+  UNAUTHORIZED: 401,
+};
 
 const token = localStorage.getItem('token') ?? '';
 
@@ -18,6 +23,11 @@ export const createAPI = (onUnauthorized) => {
   const onSuccess = (response) => response;
   const onFail = (err) => {
     const {response} = err;
+
+    //console.log(response.status);
+    if (response.status === HttpCode.UNAUTHORIZED) {
+      onUnauthorized();
+    }
 
     throw err;
   };

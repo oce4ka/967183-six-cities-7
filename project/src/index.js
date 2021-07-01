@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
@@ -10,10 +11,11 @@ import {reducer} from './store/reducer';
 import thunk from 'redux-thunk';
 import {createAPI} from './services/api';
 import {ActionCreator} from './store/action';
-import {fetchOfferList} from './store/api-actions';
+import {checkAuth, fetchOfferList} from './store/api-actions';
+import {AuthorizationStatus} from './const';
 
 const api = createAPI(
-  () => store.dispatch(ActionCreator.requireAuthorization('NO_AUTH')),
+  () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
 );
 
 const store = createStore(
@@ -23,8 +25,9 @@ const store = createStore(
   ),
 );
 
+// if I don't check for token, or change token to wrong, there is 401 error in console, how to remove it from there?
+store.dispatch(checkAuth());
 store.dispatch(fetchOfferList());
-
 
 ReactDOM.render(
   <React.StrictMode>

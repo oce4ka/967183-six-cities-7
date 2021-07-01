@@ -7,18 +7,16 @@ import Offer from '../offer/offer';
 import Favorites from '../favorites/favorites';
 import Page404 from '../page404/page404';
 import {AppRoute} from '../../const';
-
 import {connect} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
+import PrivateRoute from '../private-route/private-route';
 
 function App(props) {
-  const {cityPlaceArray} = props;
-
-  const {isDataLoaded} = props;
+  const {cityPlaceArray, isDataLoaded, authorizationStatus} = props;
 
   if (!isDataLoaded) {
     return (
-      <LoadingScreen />
+      <LoadingScreen/>
     );
   }
 
@@ -28,9 +26,13 @@ function App(props) {
         <Route path={AppRoute.LOGIN}>
           <Login/>
         </Route>
-        <Route path={AppRoute.FAVORITES}>
-          <Favorites/>
-        </Route>
+        <PrivateRoute
+          exact
+          authorizationStatus={authorizationStatus}
+          path={AppRoute.FAVORITES}
+          render={() => <Favorites/>}
+        >
+        </PrivateRoute>
         <Route path={AppRoute.OFFER}>
           <Offer/>
         </Route>
@@ -50,10 +52,12 @@ function App(props) {
 App.propTypes = {
   cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
   isDataLoaded: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isDataLoaded: state.isDataLoaded,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export {App};
