@@ -29,6 +29,13 @@ export const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
+export const FilterOffersOptions = {
+  PRICE_DESCENDING: 'Price: high to low',
+  PRICE_ASCENDING: 'Price: low to high',
+  RATING_DESCENDING: 'Top rated first',
+  POPULAR: 'Popular',
+};
+
 export const Cities = [
   {name: 'Paris', coords: [48.85341, 2.3488], zoom: 13},
   {name: 'Cologne', coords: [50.935173, 6.953101], zoom: 13},
