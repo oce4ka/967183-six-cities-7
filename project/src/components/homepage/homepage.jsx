@@ -11,7 +11,6 @@ import convertKeysToCamel from '../../utils/convert-keys-to-camel';
 
 function Homepage(props) {
   const {cityPlaceArray, offersArray = [], currentCity = '', onChangeCity} = props;
-  //let offersArrayByCity = [];
 
   return (
     <Page className="page--gray page--main" {...props}>
@@ -39,7 +38,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChangeCity(city) {
     dispatch(ActionCreator.changeCity(city));
-    //dispatch(ActionCreator.loadOffers());
   },
   loadOffers() {
     dispatch(ActionCreator.loadOffers());

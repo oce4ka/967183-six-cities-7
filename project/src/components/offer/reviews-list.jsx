@@ -1,8 +1,9 @@
 import React from 'react';
-import reviews from '../../mocks/reviews';
+//import reviews from '../../mocks/reviews';
 import ReviewItem from './review-item';
 
 function ReviewsList() {
+  const reviews = [];
   const reviewsCount = reviews.length;
   return (
     reviewsCount &&

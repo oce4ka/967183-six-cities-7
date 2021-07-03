@@ -13,6 +13,7 @@ import {createAPI} from './services/api';
 import {ActionCreator} from './store/action';
 import {checkAuth, fetchOfferList} from './store/api-actions';
 import {AuthorizationStatus} from './const';
+import getToken from './utils/get-token';
 
 const api = createAPI(
   () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -26,7 +27,7 @@ const store = createStore(
 );
 
 // if I don't check for token, or change token to wrong, there is 401 error in console, how to remove it from there?
-store.dispatch(checkAuth());
+getToken() && store.dispatch(checkAuth());
 store.dispatch(fetchOfferList());
 
 ReactDOM.render(

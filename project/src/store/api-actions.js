@@ -1,10 +1,12 @@
+/* eslint-disable no-console */
 import {ActionCreator} from './action';
 import {APIRoute} from '../const';
 
-export const fetchOfferList = () => (dispatch, _getState, api) => (
-  api.get(APIRoute.OFFERS)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
-);
+export const fetchOfferList = () => (dispatch, _getState, api) => {
+  console.log('fetchOfferList');
+  return api.get(APIRoute.OFFERS)
+    .then(({data}) => dispatch(ActionCreator.loadOffers(data)));
+};
 
 export const fetchOffer = ({offerId}) => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFER.replace(':id', offerId))

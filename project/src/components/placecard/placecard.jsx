@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
-import {Link} from 'react-router-dom';
 import PlaceCardInfo from './placecard-info';
+import PlaceCardImage from './placecard-image';
 
 function PlaceCard(props) {
   const {offer, onMouseEnter, onMouseLeave, isFavorites = '', showPremium = false, activeMarkerId} = props;
@@ -11,11 +11,7 @@ function PlaceCard(props) {
   return (
     <article style={(activeMarkerId === offer.id) ? styleOfferWithHoveredMarker : null} className={`${isFavorites ? 'favorites__card' : 'cities__place-card'} place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {showPremium && offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className={`${isFavorites ? 'favorites__image-wrapper' : 'cities__image-wrapper'} place-card__image-wrapper`}>
-        <Link to={`/offer/${offer.id}`}>
-          <img className="place-card__image" src={offer.previewImage} width={isFavorites ? '150' : '260'} height={isFavorites ? '110' : '200'} alt={offer.title}/>
-        </Link>
-      </div>
+      <PlaceCardImage offer={offer} isFavorites={isFavorites}/>
       <PlaceCardInfo className={isFavorites && 'favorites__card-info'} offer={offer}/>
     </article>
   );

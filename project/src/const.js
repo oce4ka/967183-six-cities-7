@@ -29,7 +29,7 @@ export const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
-export const FilterOffersOptions = {
+export const SortOffersOptions = {
   PRICE_DESCENDING: 'Price: high to low',
   PRICE_ASCENDING: 'Price: low to high',
   RATING_DESCENDING: 'Top rated first',
