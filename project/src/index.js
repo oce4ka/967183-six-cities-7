@@ -26,7 +26,6 @@ const store = createStore(
   ),
 );
 
-// if I don't check for token, or change token to wrong, there is 401 error in console, how to remove it from there?
 getToken() && store.dispatch(checkAuth());
 store.dispatch(fetchOfferList());
 

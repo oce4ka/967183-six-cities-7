@@ -39,9 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeCity(city) {
     dispatch(ActionCreator.changeCity(city));
   },
-  loadOffers() {
-    dispatch(ActionCreator.loadOffers());
-  },
 });
 
 export {Homepage};

@@ -17,6 +17,10 @@ const LOAD_OFFERS_NEARBY = 'LOAD_OFFERS_NEARBY';
 const loadOffersNearby = () => ({
   type: LOAD_OFFERS_NEARBY,
 });
+const LOAD_REVIEWS = 'LOAD_REVIEWS';
+const loadReviews = () => ({
+  type: LOAD_REVIEWS,
+});
 const REQUIRED_AUTHORIZATION = 'REQUIRE_AUTHORIZATION';
 const requiredAuthorization = () => ({
   type: REQUIRED_AUTHORIZATION,
@@ -31,6 +35,7 @@ export const ActionType = {
   LOAD_OFFERS: 'data/loadOffers',
   LOAD_OFFER: 'data/loadOffer',
   LOAD_OFFERS_NEARBY: 'data/loadOffersNearby',
+  LOAD_REVIEWS: 'data/loadReviews',
   LOGOUT: 'user/logout',
   SET_AUTHORIZATION_DATA: 'user/setAuthorizationData',
 };
@@ -48,9 +53,13 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFER,
     payload: offer,
   }),
-  loadOffersNearby: (offersNearby) => ({
+  loadOffersNearby: (offers) => ({
     type: ActionType.LOAD_OFFERS_NEARBY,
-    payload: offersNearby,
+    payload: offers,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,

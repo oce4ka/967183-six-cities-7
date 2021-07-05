@@ -2,15 +2,27 @@
 import {ActionCreator} from './action';
 import {APIRoute} from '../const';
 
-export const fetchOfferList = () => (dispatch, _getState, api) => {
-  console.log('fetchOfferList');
-  return api.get(APIRoute.OFFERS)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data)));
-};
+export const fetchOfferList = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.OFFERS)
+    .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
+);
 
-export const fetchOffer = ({offerId}) => (dispatch, _getState, api) => (
-  api.get(APIRoute.OFFER.replace(':id', offerId))
+export const fetchOfferListNearby = (currentOfferId) => (dispatch, _getState, api) => (
+  api.get(APIRoute.NEARBY.replace(': hotel_id', currentOfferId))
+    .then(({data}) => dispatch(ActionCreator.loadOffersNearby(data)))
+);
+
+export const fetchOffer = (currentOfferId) => (dispatch, _getState, api) => (
+  api.get(APIRoute.OFFER.replace(': id', currentOfferId))
     .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
+    .catch(() => {
+      window.location.href = '/404'; // Todo: to find more beutiful way
+    })
+);
+
+export const fetchReviews = (currentOfferId) => (dispatch, _getState, api) => (
+  api.get(APIRoute.REVIEWS.replace(': hotel_id', currentOfferId))
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

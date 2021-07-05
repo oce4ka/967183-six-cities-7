@@ -18,9 +18,11 @@ export const AppRoute = {
 
 export const APIRoute = {
   OFFERS: '/hotels',
-  OFFER: '/hotels/:id',
+  OFFER: '/hotels/: id',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  NEARBY: '/hotels/: hotel_id/nearby',
+  REVIEWS: '/comments/: hotel_id',
 };
 
 export const AuthorizationStatus = {

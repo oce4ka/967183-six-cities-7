@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, {useRef, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
@@ -9,6 +10,7 @@ import Settings, {Cities} from '../../const';
 // Todo: make HOC for Offer and Map - no need
 
 let currentMarkerFromHoveredPlaceCard;
+const markerArray = [];
 const drawMapAnchors = (map, offersArray, currentOffer, setActiveMarker) => {
   const defaultCustomIcon = leaflet.icon({
     iconUrl: Settings.URL_MARKER_DEFAULT,
@@ -40,6 +42,7 @@ const drawMapAnchors = (map, offersArray, currentOffer, setActiveMarker) => {
         marker.setIcon(defaultCustomIcon);
       });
       marker.addTo(map);
+      markerArray.push(marker);
     }
     !hasHoveredPlaceCard && currentMarkerFromHoveredPlaceCard && map.removeLayer(currentMarkerFromHoveredPlaceCard);
   });
@@ -47,10 +50,12 @@ const drawMapAnchors = (map, offersArray, currentOffer, setActiveMarker) => {
 
 
 function Map(props) {
-  const {className, offersArray, activePlaceId, currentCity, setActiveMarker} = props;
+  const {className, offersArray, activePlaceId, currentCity, setActiveMarker, removeMarkersOnUpdate = false} = props;
   const currentOffer = offersArray.filter((offer) => (offer.id === activePlaceId))[0]; // get array with current offer only
   const mapRef = useRef(null);
   const [map, setMap] = useState(null); // keep map instance in state
+
+  //const customMarker =
 
   useEffect(() => { // init map
     const city = Cities.filter((cityItem) => currentCity === cityItem.name)[0] || Cities[0];
@@ -67,13 +72,14 @@ function Map(props) {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         })
         .addTo(mapInstance);
-      //drawMapAnchors(mapInstance, offersArray, null); //draw inactive anchors
-      //if (currentMarkerFromHoveredPlaceCard) {map.removeLayer(currentMarkerFromHoveredPlaceCard);}
       setMap(mapInstance); // send map instance to state
     } else {
       map.flyTo(city.coords);
+      removeMarkersOnUpdate && markerArray.forEach((marker) => {
+        map.removeLayer(marker);
+      });
     }
-  }, [offersArray, currentCity, map]);
+  }, [offersArray, currentCity, map, removeMarkersOnUpdate]);
 
   useEffect(() => {
     map && drawMapAnchors(map, offersArray, currentOffer, setActiveMarker);
@@ -90,6 +96,7 @@ Map.propTypes = {
   activePlaceId: PropTypes.number.isRequired,
   currentCity: PropTypes.string.isRequired,
   setActiveMarker: PropTypes.func,
+  removeMarkersOnUpdate: PropTypes.bool,
 };
 
 export default Map;

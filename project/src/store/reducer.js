@@ -10,6 +10,8 @@ const initialState = {
   isOfferLoaded: false,
   offersNearby: [],
   isOffersNearbyLoaded: false,
+  reviews: [],
+  isReviewsLoaded: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   authInfo: {},
 };
@@ -26,6 +28,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: action.payload,
         isDataLoaded: true,
+      };
+    case ActionType.LOAD_OFFERS_NEARBY:
+      return {
+        ...state,
+        offersNearby: action.payload,
+        isOffersNearbyLoaded: true,
+      };
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+        isReviewsLoaded: true,
       };
     case ActionType.LOAD_OFFER:
       return {
@@ -56,8 +70,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export {reducer};
-
-/*
- offers: offers.filter((offer) => (offer.city.name === Settings.DEFAULT_CITY)),
-        offers: offers.filter((offer) => (offer.city.name === state.city)),
- */

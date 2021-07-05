@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import React, {useState} from 'react';
+/* eslint-disable no-unused-vars */
+import React, {useEffect, useState} from 'react';
 import FormReview from './form-review';
-import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
+import reviewProp from '../offer/review.prop';
 import {useLocation} from 'react-router-dom';
 import convertStarsToPercent from '../../utils/convert-stars-to-percent';
 import ReviewsList from './reviews-list';
@@ -12,15 +13,46 @@ import Page from './../app/page';
 import Main from './../app/main';
 import PlaceCardsList from '../placecard/placecards-list';
 import Map from '../placecard/map';
+import {connect} from 'react-redux';
+import {isUserLoggedIn} from '../../utils/check-auth';
+import PropTypes from 'prop-types';
+import {fetchOffer, fetchOfferListNearby, fetchReviews} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
+import convertKeysToCamel from '../../utils/convert-keys-to-camel';
 
 function Offer(props) {
-  const {isUserLoggedIn = true, offersArray} = props;
+  const {
+    offer,
+    authorizationStatus,
+    onPageLoad,
+    isOfferLoaded = false,
+    offersNearby:offersArray,
+    isOffersNearbyLoaded = false,
+    reviews,
+    isReviewsLoaded = false,
+  } = props;
   const [activePlaceId, setActivePlaceId] = useState(0);
   const [activeMarkerId, setActiveMarkerId] = useState(0);
   /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
+
+  useEffect(() => {
+    onPageLoad(currentOfferId);
+  }, [currentOfferId, onPageLoad]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [offer]);
+
+  if (!isOfferLoaded || !isOffersNearbyLoaded || !isReviewsLoaded) {
+    return (
+      <LoadingScreen/>
+    );
+  }
+
   /* Todo: what is the best option to get the object with object.id=XX in array of objects? */
-  const offer = offersArray.filter((item) => item.id === currentOfferId)[0]; // get offer with the same id as in url
+
+  /* todo: never??? */
   if (offer === undefined) {
     return (
       <Redirect to={AppRoute.PAGE404}/>
@@ -122,8 +154,8 @@ function Offer(props) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewsList/>
-                {isUserLoggedIn &&
+                <ReviewsList reviews={reviews}/>
+                {isUserLoggedIn(authorizationStatus) &&
                 <FormReview
                   onAnswer={() => {
                   }}
@@ -137,6 +169,7 @@ function Offer(props) {
             activePlaceId={activePlaceId}
             offersArray={offersArray}
             currentCity={offer.city.name}
+            removeMarkersOnUpdate
           />
         </section>
         <div className="container">
@@ -155,9 +188,40 @@ function Offer(props) {
   );
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  onPageLoad(currentOfferId) {
+    //console.log(currentOfferId);
+    dispatch(fetchOffer(currentOfferId));
+    dispatch(fetchOfferListNearby(currentOfferId));
+    dispatch(fetchReviews(currentOfferId));
+  },
+  /*
+  loadOffer(currentOfferId) {
+    dispatch(ActionCreator.loadOffer(currentOfferId));
+  },
+  */
+});
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  offer: convertKeysToCamel(state.offer),
+  isOfferLoaded: state.isOfferLoaded,
+  offersNearby: convertKeysToCamel(state.offersNearby),
+  isOffersNearbyLoaded: state.isOffersNearbyLoaded,
+  reviews: convertKeysToCamel(state.reviews),
+  isReviewsLoaded: state.isReviewsLoaded,
+});
+
 Offer.propTypes = {
-  isUserLoggedIn: PropTypes.bool,
-  offersArray: PropTypes.arrayOf(offerProp),
+  authorizationStatus: PropTypes.string.isRequired,
+  onPageLoad: PropTypes.func.isRequired,
+  offer: PropTypes.shape(offerProp), //Todo: Why???
+  isOfferLoaded: PropTypes.bool.isRequired,
+  offersNearby: PropTypes.arrayOf(offerProp),
+  isOffersNearbyLoaded: PropTypes.bool.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape(reviewProp)),
+  isReviewsLoaded: PropTypes.bool.isRequired,
 };
 
-export default Offer;
+export {Offer};
+export default connect(mapStateToProps, mapDispatchToProps)(Offer);
