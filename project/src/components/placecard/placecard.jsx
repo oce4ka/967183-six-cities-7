@@ -26,4 +26,8 @@ PlaceCard.propTypes = {
   activeMarkerId: PropTypes.number,
 };
 
-export default PlaceCard;
+//Todo: it's getting slower?
+export default React.memo(PlaceCard,
+  (propsPrev, propsNext) =>
+    propsPrev.activeMarkerId === propsNext.activeMarkerId);
+

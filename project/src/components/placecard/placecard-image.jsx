@@ -20,4 +20,4 @@ PlaceCardImage.propTypes = {
   isFavorites: PropTypes.string.isRequired,
 };
 
-export default PlaceCardImage;
+export default React.memo(PlaceCardImage);

@@ -51,4 +51,4 @@ PlaceCardSortingSelect.propTypes = {
   setSortPayload: PropTypes.func.isRequired,
 };
 
-export default PlaceCardSortingSelect;
+export default React.memo(PlaceCardSortingSelect);

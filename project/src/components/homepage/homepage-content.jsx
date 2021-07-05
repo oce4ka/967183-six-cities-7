@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import PlaceCardsList from '../placecard/placecards-list';
 import PropTypes from 'prop-types';
 import offerProp from './../offer/offer.prop';
@@ -17,8 +17,6 @@ function HomepageContent(props) {
 
   useEffect(() => {
     setOffersArraySorted(sortOffers(sortPayload, [...offersArray]));
-    console.log('update city');
-    console.log(sortPayload);
   }, [offersArray, sortPayload]);
 
   const showPremium = true;
@@ -27,9 +25,9 @@ function HomepageContent(props) {
     setActivePlaceId(offerId);
   };
 
-  const setActiveMarker = (offerId) => {
-    setActiveMarkerId(offerId);
-  };
+  const setActiveMarker = useCallback((offerId) => setActiveMarkerId(offerId), [setActiveMarkerId]);
+
+  const changeSortPayload = useCallback((payload) => setSortPayload(payload), [setSortPayload]);
 
   return (
     <div className="cities">
@@ -39,7 +37,7 @@ function HomepageContent(props) {
           <b className="places__found">{offersArray.length} places to stay in {currentCity || '6 Cities'}</b>
           <PlaceCardSortingSelect
             sortPayload={sortPayload}
-            setSortPayload={setSortPayload}
+            setSortPayload={changeSortPayload}
           />
           <PlaceCardsList
             className='cities__places-list places__list tabs__content'

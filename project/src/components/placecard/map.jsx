@@ -99,4 +99,5 @@ Map.propTypes = {
   removeMarkersOnUpdate: PropTypes.bool,
 };
 
-export default Map;
+//Todo: it's getting slower?
+export default React.memo(Map);

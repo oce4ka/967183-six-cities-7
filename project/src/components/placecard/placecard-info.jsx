@@ -42,4 +42,4 @@ PlaceCardInfo.propTypes = {
   className: PropTypes.string,
 };
 
-export default PlaceCardInfo;
+export default React.memo(PlaceCardInfo);
