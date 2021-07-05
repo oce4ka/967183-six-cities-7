@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import FormReview from './form-review';
 import offerProp from '../offer/offer.prop';
 import reviewProp from '../offer/review.prop';
@@ -44,6 +43,12 @@ function Offer(props) {
     window.scrollTo(0, 0);
   }, [offer]);
 
+  const setActivePlace = useCallback((offerId) => setActivePlaceId(offerId), [setActivePlaceId]);
+
+  const setActiveMarker = (offerId) => {
+    setActiveMarkerId(offerId);
+  };
+
   if (!isOfferLoaded || !isOffersNearbyLoaded || !isReviewsLoaded) {
     return (
       <LoadingScreen/>
@@ -51,21 +56,12 @@ function Offer(props) {
   }
 
   /* Todo: what is the best option to get the object with object.id=XX in array of objects? */
-
   /* todo: never??? */
   if (offer === undefined) {
     return (
       <Redirect to={AppRoute.PAGE404}/>
     );
   }
-
-  const setActivePlace = (offerId) => {
-    setActivePlaceId(offerId);
-  };
-
-  const setActiveMarker = (offerId) => {
-    setActiveMarkerId(offerId);
-  };
 
   return (
     <Page>
@@ -169,7 +165,6 @@ function Offer(props) {
             activePlaceId={activePlaceId}
             offersArray={offersArray}
             currentCity={offer.city.name}
-            removeMarkersOnUpdate
           />
         </section>
         <div className="container">

@@ -1,6 +1,6 @@
 import {SortOffersOptions} from '../const';
 
-const sortOffers = (sort, offers) => {
+const sortOffers = (sort, [...offers]) => {
   let offersArraySorted;
   switch (sort) {
     case SortOffersOptions.RATING_DESCENDING:

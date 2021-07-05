@@ -16,7 +16,7 @@ function HomepageContent(props) {
   const [sortPayload, setSortPayload] = useState(SortOffersOptions.POPULAR);
 
   useEffect(() => {
-    setOffersArraySorted(sortOffers(sortPayload, [...offersArray]));
+    setOffersArraySorted(sortOffers(sortPayload, offersArray));
   }, [offersArray, sortPayload]);
 
   const showPremium = true;
@@ -48,15 +48,13 @@ function HomepageContent(props) {
           />
         </section>
         <div className="cities__right-section">
-          {
-            <Map
-              className="cities__map map"
-              setActiveMarker={setActiveMarker}
-              activePlaceId={activePlaceId}
-              offersArray={offersArray}
-              currentCity={currentCity}
-            />
-          }
+          <Map
+            className="cities__map map"
+            setActiveMarker={setActiveMarker}
+            activePlaceId={activePlaceId}
+            offersArray={offersArray}
+            currentCity={currentCity}
+          />
         </div>
       </div>
     </div>

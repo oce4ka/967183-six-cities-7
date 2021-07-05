@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import PlaceCard from './placecard';
@@ -6,13 +6,15 @@ import PlaceCard from './placecard';
 function PlaceCardsList(props) {
   const {offersArray, setActivePlace, className, ...restProps} = props;
 
+  const changeActivePlace = useCallback((offerId) => setActivePlace(offerId), [setActivePlace]);
+
   return (
     <div className={className}>
       {offersArray.map((offer) => (
         <PlaceCard {...restProps} key={offer.id} offer={offer} onMouseEnter={() => {
-          setActivePlace(offer.id);
+          changeActivePlace(offer.id);
         }} onMouseLeave={() => {
-          setActivePlace(0);
+          changeActivePlace(0);
         }}
         />),
       )}
@@ -29,4 +31,4 @@ PlaceCardsList.propTypes = {
   showPremium: PropTypes.bool,
 };
 
-export default PlaceCardsList;
+export default React.memo(PlaceCardsList);

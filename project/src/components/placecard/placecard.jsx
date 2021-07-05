@@ -26,8 +26,9 @@ PlaceCard.propTypes = {
   activeMarkerId: PropTypes.number,
 };
 
-//Todo: it's getting slower?
-export default React.memo(PlaceCard,
-  (propsPrev, propsNext) =>
-    propsPrev.activeMarkerId === propsNext.activeMarkerId);
+// if we don't need to highlight the card because of hovered marker on map
+const isPlaceCardHighlightingChanged = (propsPrev, propsNext) => (propsPrev.activeMarkerId !== propsPrev.offer.id && propsNext.activeMarkerId !== propsNext.offer.id);
+
+export default React.memo(PlaceCard, isPlaceCardHighlightingChanged);
+
 

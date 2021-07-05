@@ -10,8 +10,7 @@ import Settings, {Cities} from '../../const';
 // Todo: make HOC for Offer and Map - no need
 
 let currentMarkerFromHoveredPlaceCard;
-const markerArray = [];
-const drawMapAnchors = (map, offersArray, currentOffer, setActiveMarker) => {
+const drawMapAnchors = ({map, offersArray, currentOffer, setActiveMarker, markersLayer}) => {
   const defaultCustomIcon = leaflet.icon({
     iconUrl: Settings.URL_MARKER_DEFAULT,
     iconSize: [27, 39],
@@ -41,8 +40,7 @@ const drawMapAnchors = (map, offersArray, currentOffer, setActiveMarker) => {
         setActiveMarker(0);
         marker.setIcon(defaultCustomIcon);
       });
-      marker.addTo(map);
-      markerArray.push(marker);
+      marker.addTo(markersLayer);
     }
     !hasHoveredPlaceCard && currentMarkerFromHoveredPlaceCard && map.removeLayer(currentMarkerFromHoveredPlaceCard);
   });
@@ -54,8 +52,7 @@ function Map(props) {
   const currentOffer = offersArray.filter((offer) => (offer.id === activePlaceId))[0]; // get array with current offer only
   const mapRef = useRef(null);
   const [map, setMap] = useState(null); // keep map instance in state
-
-  //const customMarker =
+  const [markersLayer, setMarkersLayer] = useState(null); // keep map instance in state
 
   useEffect(() => { // init map
     const city = Cities.filter((cityItem) => currentCity === cityItem.name)[0] || Cities[0];
@@ -74,16 +71,21 @@ function Map(props) {
         .addTo(mapInstance);
       setMap(mapInstance); // send map instance to state
     } else {
-      map.flyTo(city.coords);
-      removeMarkersOnUpdate && markerArray.forEach((marker) => {
-        map.removeLayer(marker);
-      });
+      map.flyTo(city.coords, city.zoom);
     }
-  }, [offersArray, currentCity, map, removeMarkersOnUpdate]);
+    return () => {
+      markersLayer && markersLayer.clearLayers(); // clear markers
+    };
+
+  }, [offersArray, currentCity, map, removeMarkersOnUpdate, markersLayer, currentOffer, setActiveMarker]);
 
   useEffect(() => {
-    map && drawMapAnchors(map, offersArray, currentOffer, setActiveMarker);
-  }, [activePlaceId, currentOffer, map, offersArray, setActiveMarker]);
+    map && setMarkersLayer(leaflet.layerGroup().addTo(map));
+  }, [map]);
+
+  useEffect(() => {
+    markersLayer && drawMapAnchors({map, offersArray, currentOffer, setActiveMarker, markersLayer});
+  }, [activePlaceId, currentOffer, map, offersArray, setActiveMarker, markersLayer]);
 
   return (
     <section ref={mapRef} className={className}></section>
@@ -99,5 +101,4 @@ Map.propTypes = {
   removeMarkersOnUpdate: PropTypes.bool,
 };
 
-//Todo: it's getting slower?
-export default React.memo(Map);
+export default Map;
