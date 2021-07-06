@@ -8,14 +8,14 @@ function ReviewsList(props) {
   const reviewsCount = reviews.length;
   return (
     reviewsCount &&
-    <React.Fragment>
+    <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
       <ul className="reviews__list">
         {reviews.map((reviewsItem) => (
           <ReviewItem key={reviewsItem.id} reviewsItem={reviewsItem}/>
         ))}
       </ul>
-    </React.Fragment>
+    </section>
   );
 }
 

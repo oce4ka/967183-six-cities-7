@@ -4,7 +4,6 @@ import FormReview from './form-review';
 import offerProp from '../offer/offer.prop';
 import reviewProp from '../offer/review.prop';
 import {useLocation} from 'react-router-dom';
-import convertStarsToPercent from '../../utils/convert-stars-to-percent';
 import ReviewsList from './reviews-list';
 import {AppRoute} from '../../const';
 import {Redirect} from 'react-router-dom';
@@ -20,6 +19,9 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import convertKeysToCamel from '../../utils/convert-keys-to-camel';
 import useMapInteraction from '../../hooks/use-map-interaction';
 import useScrollToTop from '../../hooks/use-scroll-to-top';
+import HostInfo from './host-info';
+import PropertyInfo from './property-info';
+import PropertyGallery from './property-gallery';
 
 function Offer(props) {
   const {
@@ -27,7 +29,7 @@ function Offer(props) {
     authorizationStatus,
     onPageLoad,
     isOfferLoaded = false,
-    offersNearby:offersArray,
+    offersNearby: offersArray,
     isOffersNearbyLoaded = false,
     reviews,
     isReviewsLoaded = false,
@@ -35,7 +37,7 @@ function Offer(props) {
   /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
 
-  const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0,0);
+  const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0, 0);
   useScrollToTop(currentOfferId, true);
 
   useEffect(() => {
@@ -48,8 +50,7 @@ function Offer(props) {
     );
   }
 
-  /* Todo: what is the best option to get the object with object.id=XX in array of objects? */
-  /* todo: never??? */
+  /* todo: never??? Check! */
   if (offer === undefined) {
     return (
       <Redirect to={AppRoute.PAGE404}/>
@@ -60,96 +61,17 @@ function Offer(props) {
     <Page>
       <Main className="page__main--property">
         <section className="property">
-          <div className="property__gallery-container container">
-            <div className="property__gallery">
-              {offer.images.map((imageUrl) =>
-                (
-                  <div className="property__image-wrapper" key={imageUrl}>
-                    <img className="property__image" src={imageUrl} alt={offer.title}/>
-                  </div>
-                ),
-              )}
-            </div>
-          </div>
+          <PropertyGallery offer={offer}/>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.isPremium && <div className="property__mark"><span>Premium</span></div>}
-              <div className="property__name-wrapper">
-                <h1 className="property__name">
-                  {offer.title}
-                </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
-              </div>
-              <div className="property__rating rating">
-                <div className="property__stars rating__stars">
-                  {/* Todo: bad? */}
-                  <span style={{width: `${convertStarsToPercent(offer.rating)}%`}}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="property__rating-value rating__value">{offer.rating}</span>
-              </div>
-              <ul className="property__features">
-
-
-                <li className="property__feature property__feature--entire">
-                  {offer.type}
-                </li>
-                <li className="property__feature property__feature--bedrooms">
-                  {offer.bedrooms} Bedrooms
-                </li>
-                <li className="property__feature property__feature--adults">
-                  Max {offer.maxAdults} adults
-                </li>
-              </ul>
-              <div className="property__price">
-                <b className="property__price-value">&euro;{offer.price}</b>
-                <span className="property__price-text">&nbsp;night</span>
-              </div>
-              <div className="property__inside">
-                <h2 className="property__inside-title">What&apos;s inside</h2>
-                <ul className="property__inside-list">
-                  {/* Todo: why " Do not use Array index in keys" */}
-                  {offer.goods.map((goodsItem) =>
-                    (
-                      <li key={goodsItem} className="property__inside-item">
-                        {goodsItem}
-                      </li>
-                    ),
-                  )}
-                </ul>
-              </div>
-              <div className="property__host">
-                <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt={offer.host.name}/>
-                  </div>
-                  <span className="property__user-name">
-                    {offer.host.name}
-                  </span>
-                  <span className="property__user-status">
-                    {offer.host.isPro && 'Pro'}
-                  </span>
-                </div>
-                <div className="property__description">
-                  <p className="property__text">
-                    {offer.description}
-                  </p>
-                </div>
-              </div>
-              <section className="property__reviews reviews">
-                <ReviewsList reviews={reviews}/>
-                {isUserLoggedIn(authorizationStatus) &&
-                <FormReview
-                  onAnswer={() => {
-                  }}
-                />}
-              </section>
+              <PropertyInfo offer={offer}/>
+              <HostInfo offer={offer}/>
+              <ReviewsList reviews={reviews}/>
+              {isUserLoggedIn(authorizationStatus) &&
+              <FormReview
+                onAnswer={() => {
+                }}
+              />}
             </div>
           </div>
           <Map
@@ -183,11 +105,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchOfferListNearby(currentOfferId));
     dispatch(fetchReviews(currentOfferId));
   },
-  /*
-  loadOffer(currentOfferId) {
-    dispatch(ActionCreator.loadOffer(currentOfferId));
-  },
-  */
 });
 
 const mapStateToProps = (state) => ({
@@ -203,7 +120,7 @@ const mapStateToProps = (state) => ({
 Offer.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   onPageLoad: PropTypes.func.isRequired,
-  offer: PropTypes.shape(offerProp), //Todo: Why???
+  offer: PropTypes.shape(offerProp),
   isOfferLoaded: PropTypes.bool.isRequired,
   offersNearby: PropTypes.arrayOf(offerProp),
   isOffersNearbyLoaded: PropTypes.bool.isRequired,
