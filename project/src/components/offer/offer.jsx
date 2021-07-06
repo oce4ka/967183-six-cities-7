@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import FormReview from './form-review';
 import offerProp from '../offer/offer.prop';
 import reviewProp from '../offer/review.prop';
@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import {fetchOffer, fetchOfferListNearby, fetchReviews} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import convertKeysToCamel from '../../utils/convert-keys-to-camel';
+import useMapInteraction from '../../hooks/use-map-interaction';
 
 function Offer(props) {
   const {
@@ -30,8 +31,9 @@ function Offer(props) {
     reviews,
     isReviewsLoaded = false,
   } = props;
-  const [activePlaceId, setActivePlaceId] = useState(0);
-  const [activeMarkerId, setActiveMarkerId] = useState(0);
+
+  const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0,0);
+
   /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
 
@@ -42,12 +44,6 @@ function Offer(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [offer]);
-
-  const setActivePlace = useCallback((offerId) => setActivePlaceId(offerId), [setActivePlaceId]);
-
-  const setActiveMarker = (offerId) => {
-    setActiveMarkerId(offerId);
-  };
 
   if (!isOfferLoaded || !isOffersNearbyLoaded || !isReviewsLoaded) {
     return (

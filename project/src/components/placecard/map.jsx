@@ -101,4 +101,4 @@ Map.propTypes = {
   removeMarkersOnUpdate: PropTypes.bool,
 };
 
-export default Map;
+export default React.memo(Map);

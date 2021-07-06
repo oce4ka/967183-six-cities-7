@@ -1,11 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import {useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 function CitiesList(props) {
   const {cityPlaceArray, currentCity, onChangeCity} = props;
-  //const history = useHistory();
-  //history.replace(`#${currentCity}`);
+  /*
+  useEffect(() => {
+    !!window.location.hash && onChangeCity(window.location.hash.substring(1));
+  }, [onChangeCity]);
+  */
+
+  const history = useHistory();
+  const handleCityClick = (evt, cityPlace) => {
+    evt.preventDefault();
+    onChangeCity(cityPlace);
+    //history.push(`#${cityPlace}`);
+    history.push();
+  };
 
   return (
     <div className="tabs">
@@ -13,11 +24,10 @@ function CitiesList(props) {
         <ul className="locations__list tabs__list">
           {cityPlaceArray.map((cityPlace) => (
             <li className="locations__item" key={`li-${cityPlace}`}>
-              <a href={`#1${cityPlace}`} onClick={(evt) => {
-                evt.preventDefault();
-                onChangeCity(cityPlace);
-                //history.push(`#${cityPlace}`);
-              }} className={`locations__item-link tabs__item ${currentCity === cityPlace && 'tabs__item--active'}`}
+              <a
+                href={`#${cityPlace}`}
+                onClick={((evt) => handleCityClick(evt, cityPlace))}
+                className={`locations__item-link tabs__item ${currentCity === cityPlace && 'tabs__item--active'}`}
               >
                 <span>{cityPlace}</span>
               </a>

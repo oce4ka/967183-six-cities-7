@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {SortOffersOptions} from './../../const';
 
 function PlaceCardSortingSelect(props) {
-  const {sortPayload, setSortPayload} = props;
+  const {sortingPayload, setSortingPayload} = props;
   const [selectVisibilityFlag, setSelectVisibilityFlag] = useState(false);
 
   const toggleSelectVisibilityFlag = (evt) => {
@@ -16,16 +16,16 @@ function PlaceCardSortingSelect(props) {
 
   const handleClickChooseSortOption = (evt) => {
     const optionSelected = evt.target.textContent;
-    setSortPayload(optionSelected);
+    setSortingPayload(optionSelected);
     toggleSelectVisibilityFlag();
   };
 
-  const getListItemClass = (currentSortOption) => (currentSortOption === sortPayload ? 'places__option places__option--active' : 'places__option');
+  const getListItemClass = (currentSortOption) => (currentSortOption === sortingPayload ? 'places__option places__option--active' : 'places__option');
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
-      <span onClick={handleClickSortSelect} className="places__sorting-type" tabIndex="0">{sortPayload}
+      <span onClick={handleClickSortSelect} className="places__sorting-type" tabIndex="0">{sortingPayload}
         <svg className="places__sorting-arrow" width="7" height="4"><use xlinkHref="#icon-arrow-select"></use></svg>
       </span>
       <ul className={`places__options places__options--custom ${selectVisibilityFlag && 'places__options--opened'}`}>
@@ -47,8 +47,8 @@ function PlaceCardSortingSelect(props) {
 }
 
 PlaceCardSortingSelect.propTypes = {
-  sortPayload: PropTypes.string.isRequired,
-  setSortPayload: PropTypes.func.isRequired,
+  sortingPayload: PropTypes.string.isRequired,
+  setSortingPayload: PropTypes.func.isRequired,
 };
 
 export default React.memo(PlaceCardSortingSelect);
