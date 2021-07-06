@@ -107,14 +107,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  offer: convertKeysToCamel(state.offer),
-  isOfferLoaded: state.isOfferLoaded,
-  offersNearby: convertKeysToCamel(state.offersNearby),
-  isOffersNearbyLoaded: state.isOffersNearbyLoaded,
-  reviews: convertKeysToCamel(state.reviews),
-  isReviewsLoaded: state.isReviewsLoaded,
+const mapStateToProps = ({USER, OFFER, REVIEW}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  offer: convertKeysToCamel(OFFER.offer),
+  isOfferLoaded: OFFER.isOfferLoaded,
+  offersNearby: convertKeysToCamel(OFFER.offersNearby),
+  isOffersNearbyLoaded: OFFER.isOffersNearbyLoaded,
+  reviews: convertKeysToCamel(REVIEW.reviews),
+  isReviewsLoaded: REVIEW.isReviewsLoaded,
 });
 
 Offer.propTypes = {

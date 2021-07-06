@@ -6,21 +6,21 @@ import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import App from './components/app/app';
 import Settings from './const';
-import {reducer} from './store/reducer';
+import rootReducer from './store/root-reducer';
 
 import thunk from 'redux-thunk';
 import {createAPI} from './services/api';
-import {ActionCreator} from './store/action';
+import {requireAuthorization} from './store/action';
 import {checkAuth, fetchOfferList} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import getToken from './utils/get-token';
 
 const api = createAPI(
-  () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
+  () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
 );
 
 const store = createStore(
-  reducer,
+  rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
   ),

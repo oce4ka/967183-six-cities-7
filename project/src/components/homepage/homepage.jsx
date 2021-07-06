@@ -6,7 +6,7 @@ import offerProp from './../offer/offer.prop';
 import Page from './../app/page';
 import Main from '../app/main';
 import CitiesList from './cities-list';
-import {ActionCreator} from '../../store/action';
+import {changeCity} from '../../store/action';
 import convertKeysToCamel from '../../utils/convert-keys-to-camel';
 
 function Homepage(props) {
@@ -30,14 +30,14 @@ Homepage.propTypes = {
   onChangeCity: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  currentCity: state.city,
-  offersArray: convertKeysToCamel(state.offers),
+const mapStateToProps = ({SEEK, OFFER}) => ({
+  currentCity: SEEK.city,
+  offersArray: convertKeysToCamel(OFFER.offers),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(changeCity(city));
   },
 });
 

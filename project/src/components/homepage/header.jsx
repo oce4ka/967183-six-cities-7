@@ -58,9 +58,9 @@ Header.propTypes = {
   email: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  email: state.authInfo.email,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  email: USER.authInfo.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
