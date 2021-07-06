@@ -19,6 +19,7 @@ import {fetchOffer, fetchOfferListNearby, fetchReviews} from '../../store/api-ac
 import LoadingScreen from '../loading-screen/loading-screen';
 import convertKeysToCamel from '../../utils/convert-keys-to-camel';
 import useMapInteraction from '../../hooks/use-map-interaction';
+import useScrollToTop from '../../hooks/use-scroll-to-top';
 
 function Offer(props) {
   const {
@@ -31,19 +32,15 @@ function Offer(props) {
     reviews,
     isReviewsLoaded = false,
   } = props;
-
-  const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0,0);
-
   /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
+
+  const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0,0);
+  useScrollToTop(currentOfferId, true);
 
   useEffect(() => {
     onPageLoad(currentOfferId);
   }, [currentOfferId, onPageLoad]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [offer]);
 
   if (!isOfferLoaded || !isOffersNearbyLoaded || !isReviewsLoaded) {
     return (

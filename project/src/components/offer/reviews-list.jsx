@@ -1,6 +1,7 @@
 import React from 'react';
-//import reviews from '../../mocks/reviews';
 import ReviewItem from './review-item';
+import PropTypes from 'prop-types';
+import reviewProp from './review.prop';
 
 function ReviewsList(props) {
   const {reviews} = props;
@@ -18,4 +19,8 @@ function ReviewsList(props) {
   );
 }
 
-export default ReviewsList;
+ReviewsList.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape(reviewProp)),
+};
+
+export default React.memo(ReviewsList);
