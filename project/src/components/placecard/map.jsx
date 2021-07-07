@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import offerProp from '../offer/offer.prop';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import Settings, {Cities} from '../../const';
+import Settings, {AppRoute, Cities} from '../../const';
 
 // Todo: Hook? needed? import useMap from '../../hooks/use-map';
 // Todo: make HOC for Offer and Map - no need
@@ -39,6 +39,9 @@ const drawMapAnchors = ({map, offersArray, currentOffer, setActiveMarker, marker
       marker.on('mouseout', () => {
         setActiveMarker(0);
         marker.setIcon(defaultCustomIcon);
+      });
+      marker.on('click', () => {
+        window.location = AppRoute.OFFER.replace(':id', offer.id);
       });
       marker.addTo(markersLayer);
     }
