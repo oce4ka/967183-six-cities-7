@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_CITY: 'seek/changeCity',
   LOAD_OFFERS: 'data/loadOffers',
@@ -8,42 +10,33 @@ export const ActionType = {
   SET_AUTHORIZATION_DATA: 'user/setAuthorizationData',
 };
 
-export const changeCity = (city) => ({
-  type: ActionType.CHANGE_CITY,
+export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
   city,
-});
+}));
 
-export const loadOffers = (offers) => ({
-  type: ActionType.LOAD_OFFERS,
+export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
   payload: offers,
-});
+}));
 
-export const loadOffer = (offer) => ({
-  type: ActionType.LOAD_OFFER,
+export const loadOffer = createAction(ActionType.LOAD_OFFER, (offer) => ({
   payload: offer,
-});
+}));
 
-export const loadOffersNearby = (offers) => ({
-  type: ActionType.LOAD_OFFERS_NEARBY,
+export const loadOffersNearby = createAction(ActionType.LOAD_OFFERS_NEARBY, (offers) => ({
   payload: offers,
-});
+}));
 
-export const loadReviews = (reviews) => ({
-  type: ActionType.LOAD_REVIEWS,
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
   payload: reviews,
-});
+}));
 
-export const requireAuthorization = (status) => ({
-  type: ActionType.REQUIRED_AUTHORIZATION,
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
   payload: status,
-});
+}));
 
-export const setAuthorizationData = (data) => ({
-  type: ActionType.SET_AUTHORIZATION_DATA,
+export const setAuthorizationData = createAction(ActionType.SET_AUTHORIZATION_DATA, (data) => ({
   payload: data,
-});
+}));
 
-export const logout = () => ({
-  type: ActionType.LOGOUT,
-});
+export const logout = createAction(ActionType.LOGOUT);
 
