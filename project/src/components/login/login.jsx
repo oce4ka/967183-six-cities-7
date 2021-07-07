@@ -7,6 +7,7 @@ import {login} from '../../store/api-actions';
 import {Redirect} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {isUserLoggedIn} from '../../utils/check-auth';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 
 
 function Login({onSubmit, authorizationStatus}) {
@@ -71,8 +72,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {Login};

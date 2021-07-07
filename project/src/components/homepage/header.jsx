@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {isUserLoggedIn} from '../../utils/check-auth';
 import {logout} from '../../store/api-actions';
+import {getAuthInfo, getAuthorizationStatus} from '../../store/user/selectors';
 
 function Header(props) {
   const {authorizationStatus, onLogOut, email = ''} = props;
@@ -58,9 +59,9 @@ Header.propTypes = {
   email: PropTypes.string,
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  email: USER.authInfo.email,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  email: getAuthInfo(state).email,
 });
 
 const mapDispatchToProps = (dispatch) => ({

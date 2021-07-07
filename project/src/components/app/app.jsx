@@ -10,6 +10,8 @@ import {AppRoute} from '../../const';
 import {connect} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
+import {getDataLoadedStatus} from '../../store/offer-data/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 
 function App(props) {
   const {cityPlaceArray, isDataLoaded, authorizationStatus} = props;
@@ -55,9 +57,9 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({OFFER, USER}) => ({
-  isDataLoaded: OFFER.isDataLoaded,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  isDataLoaded: getDataLoadedStatus(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {App};

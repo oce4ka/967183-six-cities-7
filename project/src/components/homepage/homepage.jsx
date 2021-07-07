@@ -8,6 +8,8 @@ import Main from '../app/main';
 import CitiesList from './cities-list';
 import {changeCity} from '../../store/action';
 import convertKeysToCamel from '../../utils/convert-keys-to-camel';
+import {getOffers} from '../../store/offer-data/selectors';
+import {getCity} from '../../store/seek-process/selectors';
 
 function Homepage(props) {
   const {cityPlaceArray, offersArray = [], currentCity = '', onChangeCity} = props;
@@ -30,9 +32,9 @@ Homepage.propTypes = {
   onChangeCity: PropTypes.func,
 };
 
-const mapStateToProps = ({SEEK, OFFER}) => ({
-  currentCity: SEEK.city,
-  offersArray: convertKeysToCamel(OFFER.offers),
+const mapStateToProps = (state) => ({
+  currentCity: getCity(state),
+  offersArray: convertKeysToCamel(getOffers(state)),
 });
 
 const mapDispatchToProps = (dispatch) => ({

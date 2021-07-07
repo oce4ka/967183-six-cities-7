@@ -22,6 +22,9 @@ import useScrollToTop from '../../hooks/use-scroll-to-top';
 import HostInfo from './host-info';
 import PropertyInfo from './property-info';
 import PropertyGallery from './property-gallery';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getOffer, getOfferLoadedStatus, getOffersNearby, getOffersNearbyLoadedStatus} from '../../store/offer-data/selectors';
+import {getReviews, getReviewsLoadedStatus} from '../../store/review-data/selectors';
 
 function Offer(props) {
   const {
@@ -100,21 +103,20 @@ function Offer(props) {
 
 const mapDispatchToProps = (dispatch) => ({
   onPageLoad(currentOfferId) {
-    //console.log(currentOfferId);
     dispatch(fetchOffer(currentOfferId));
     dispatch(fetchOfferListNearby(currentOfferId));
     dispatch(fetchReviews(currentOfferId));
   },
 });
 
-const mapStateToProps = ({USER, OFFER, REVIEW}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  offer: convertKeysToCamel(OFFER.offer),
-  isOfferLoaded: OFFER.isOfferLoaded,
-  offersNearby: convertKeysToCamel(OFFER.offersNearby),
-  isOffersNearbyLoaded: OFFER.isOffersNearbyLoaded,
-  reviews: convertKeysToCamel(REVIEW.reviews),
-  isReviewsLoaded: REVIEW.isReviewsLoaded,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  offer: convertKeysToCamel(getOffer(state)),
+  isOfferLoaded: getOfferLoadedStatus(state),
+  offersNearby: convertKeysToCamel(getOffersNearby(state)),
+  isOffersNearbyLoaded: getOffersNearbyLoadedStatus(state),
+  reviews: convertKeysToCamel(getReviews(state)),
+  isReviewsLoaded: getReviewsLoadedStatus(state),
 });
 
 Offer.propTypes = {
