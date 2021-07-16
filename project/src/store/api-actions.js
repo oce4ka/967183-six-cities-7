@@ -24,6 +24,11 @@ export const fetchReviews = (currentOfferId) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadReviews(data)))
 );
 
+export const addReview = (currentOfferId, review) => (dispatch, _getState, api) => (
+  api.post(APIRoute.REVIEWS.replace(': hotel_id', currentOfferId), review)
+    .then(({data}) => dispatch(loadReviews(data)))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data}) => dispatch(setAuthorizationData(data)))

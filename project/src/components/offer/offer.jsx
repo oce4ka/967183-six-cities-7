@@ -70,11 +70,7 @@ function Offer(props) {
               <PropertyInfo offer={offer}/>
               <HostInfo offer={offer}/>
               <ReviewsList reviews={reviews}/>
-              {isUserLoggedIn(authorizationStatus) &&
-              <FormReview
-                onAnswer={() => {
-                }}
-              />}
+              {isUserLoggedIn(authorizationStatus) && <FormReview/>}
             </div>
           </div>
           <Map
