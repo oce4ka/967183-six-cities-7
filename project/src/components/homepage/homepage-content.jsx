@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import PlaceCardsList from '../placecard/placecards-list';
 import PropTypes from 'prop-types';
@@ -53,4 +52,4 @@ HomepageContent.propTypes = {
   currentCity: PropTypes.string.isRequired,
 };
 
-export default HomepageContent;
+export default React.memo(HomepageContent);

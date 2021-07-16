@@ -14,7 +14,7 @@ import {getDataLoadedStatus} from '../../store/offer-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 
 function App(props) {
-  const {cityPlaceArray, isDataLoaded, authorizationStatus} = props;
+  const {isDataLoaded, authorizationStatus} = props;
 
   if (!isDataLoaded) {
     return (
@@ -39,9 +39,7 @@ function App(props) {
           <Offer/>
         </Route>
         <Route path={AppRoute.ROOT} exact>
-          <Homepage
-            cityPlaceArray={cityPlaceArray}
-          />
+          <Homepage/>
         </Route>
         <Route>
           <Page404/>
@@ -52,7 +50,6 @@ function App(props) {
 }
 
 App.propTypes = {
-  cityPlaceArray: PropTypes.arrayOf(PropTypes.string),
   isDataLoaded: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };

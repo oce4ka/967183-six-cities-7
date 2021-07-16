@@ -98,4 +98,4 @@ FormReview.propTypes = {
   onAnswer: PropTypes.func.isRequired,
 };
 
-export default FormReview;
+export default React.memo(FormReview);

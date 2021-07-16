@@ -4,18 +4,13 @@ import {useHistory} from 'react-router-dom';
 
 function CitiesList(props) {
   const {cityPlaceArray, currentCity, onChangeCity} = props;
-  /*
-  useEffect(() => {
-    !!window.location.hash && onChangeCity(window.location.hash.substring(1));
-  }, [onChangeCity]);
-  */
 
   const history = useHistory();
   const handleCityClick = (evt, cityPlace) => {
     evt.preventDefault();
     onChangeCity(cityPlace);
     //history.push(`#${cityPlace}`);
-    history.push();
+    history.push(); // todo: how to change city to old one when we click back button?
   };
 
   return (
