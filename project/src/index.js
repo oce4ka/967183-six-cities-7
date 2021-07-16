@@ -9,7 +9,6 @@ import {requireAuthorization} from './store/action';
 import {checkAuth, fetchOfferList} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import getToken from './utils/get-token';
-import {redirect} from './store/middlewares/redirect';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -22,7 +21,7 @@ const store = configureStore({
       thunk: {
         extraArgument: api,
       },
-    }).concat(redirect),
+    }),
 });
 
 getToken() && store.dispatch(checkAuth());

@@ -8,7 +8,6 @@ export const ActionType = {
   LOAD_REVIEWS: 'data/loadReviews',
   LOGOUT: 'user/logout',
   SET_AUTHORIZATION_DATA: 'user/setAuthorizationData',
-  REDIRECT_TO_ROUTE: 'game/redirectToRoute',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -41,7 +40,4 @@ export const setAuthorizationData = createAction(ActionType.SET_AUTHORIZATION_DA
 
 export const logout = createAction(ActionType.LOGOUT);
 
-export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
-  payload: url,
-}));
 
