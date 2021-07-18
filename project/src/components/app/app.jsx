@@ -1,17 +1,17 @@
 import React from 'react';
-import Homepage from '../homepage/homepage';
+import HomepageScreen from '../homepage-screen/homepage-screen';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import Login from '../login/login';
-import Offer from '../offer/offer';
-import Favorites from '../favorites/favorites';
-import Page404 from '../page404/page404';
 import {AppRoute} from '../../const';
-import {connect} from 'react-redux';
-import LoadingScreen from '../loading-screen/loading-screen';
+import {connect} from 'react-redux'; //todo: replace connect to hooks?
 import PrivateRoute from '../private-route/private-route';
 import {getDataLoadedStatus} from '../../store/offer-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
+import LoginScreen from '../login-screen/login-screen';
+import OfferScreen from '../offer-screen/offer-screen';
+import FavoritesScreen from '../favorites-screen/favorites-screen';
+import Page404Screen from '../page404-screen/page404-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(props) {
   const {isDataLoaded, authorizationStatus} = props;
@@ -26,23 +26,23 @@ function App(props) {
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.LOGIN}>
-          <Login/>
+          <LoginScreen/>
         </Route>
         <PrivateRoute
           exact
           authorizationStatus={authorizationStatus}
           path={AppRoute.FAVORITES}
-          render={() => <Favorites/>}
+          render={() => <FavoritesScreen/>}
         >
         </PrivateRoute>
         <Route path={AppRoute.OFFER}>
-          <Offer/>
+          <OfferScreen/>
         </Route>
         <Route path={AppRoute.ROOT} exact>
-          <Homepage/>
+          <HomepageScreen/>
         </Route>
         <Route>
-          <Page404/>
+          <Page404Screen/>
         </Route>
       </Switch>
     </BrowserRouter>

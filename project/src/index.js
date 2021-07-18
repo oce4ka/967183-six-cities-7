@@ -6,9 +6,10 @@ import App from './components/app/app';
 import rootReducer from './store/root-reducer';
 import {createAPI} from './services/api';
 import {requireAuthorization} from './store/action';
-import {checkAuth, fetchOfferList} from './store/api-actions';
+import {checkAuth, fetchOffers, fetchOffersFavorites} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import getToken from './utils/get-token';
+import {redirect} from './store/middlewares/redirect';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -21,11 +22,12 @@ const store = configureStore({
       thunk: {
         extraArgument: api,
       },
-    }),
+    }).concat(redirect),
 });
 
 getToken() && store.dispatch(checkAuth());
-store.dispatch(fetchOfferList());
+getToken() && store.dispatch(fetchOffersFavorites());
+store.dispatch(fetchOffers());
 
 ReactDOM.render(
   <React.StrictMode>

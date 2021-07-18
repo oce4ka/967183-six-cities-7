@@ -1,6 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {requireAuthorization, setAuthorizationData, logout} from '../action';
 import {AuthorizationStatus} from '../../const';
+import convertKeysToCamel from '../../utils/convert-keys-to-camel';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
@@ -13,7 +14,7 @@ const user = createReducer(initialState, (builder) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setAuthorizationData, (state, action) => {
-      state.authInfo = action.payload;
+      state.authInfo = convertKeysToCamel(action.payload);
       state.authorizationStatus = AuthorizationStatus.AUTH;
     })
     .addCase(logout, (state, action) => {

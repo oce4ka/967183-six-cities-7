@@ -1,34 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import offerProp from '../offer/offer.prop';
-import PlaceCardInfo from './placecard-info';
-import PlaceCardImage from './placecard-image';
+import offerProp from '../offer-screen/offer.prop';
+import PlacecardInfo from '../placecard-info/placecard-info';
+import PlacecardImage from '../placecard-image/placecard-image';
 
-function PlaceCard(props) {
-  const {offer, onMouseEnter, onMouseLeave, isFavorites = '', showPremium = false, activeMarkerId} = props;
+function Placecard(props) {
+  const {offer, onMouseEnter, onMouseLeave, isForFavorites = false, showPremium = false, activeMarkerId} = props;
   const styleOfferWithHoveredMarker = {opacity: 0.6};
 
   return (
-    <article style={(activeMarkerId === offer.id) ? styleOfferWithHoveredMarker : null} className={`${isFavorites ? 'favorites__card' : 'cities__place-card'} place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <article style={(activeMarkerId === offer.id) ? styleOfferWithHoveredMarker : null} className={`${isForFavorites ? 'favorites__card' : 'cities__place-card'} place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {showPremium && offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <PlaceCardImage offer={offer} isFavorites={isFavorites}/>
-      <PlaceCardInfo className={isFavorites && 'favorites__card-info'} offer={offer}/>
+      <PlacecardImage offer={offer} isForFavorites={isForFavorites}/>
+      <PlacecardInfo className={isForFavorites ? 'favorites__card-info' : ''} offer={offer}/>
     </article>
   );
 }
 
-PlaceCard.propTypes = {
+Placecard.propTypes = {
   offer: offerProp,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   showPremium: PropTypes.bool,
-  isFavorites: PropTypes.bool,
+  isForFavorites: PropTypes.bool,
   activeMarkerId: PropTypes.number,
 };
 
-// if we don't need to highlight the card because of hovered marker on map
-const isPlaceCardHighlightingChanged = (propsPrev, propsNext) => (propsPrev.activeMarkerId !== propsPrev.offer.id && propsNext.activeMarkerId !== propsNext.offer.id);
+// preventing reloading of all cards if we need to highlight the only one card because of hovered marker on map or to change Favorite marker
+const isPlacecardHighlightingChanged = (propsPrev, propsNext) => (
+  propsPrev.activeMarkerId !== propsPrev.offer.id &&
+  propsNext.activeMarkerId !== propsNext.offer.id &&
+  !(propsPrev.offer.isFavorite !== propsNext.offer.isFavorite)
+);
 
-export default React.memo(PlaceCard, isPlaceCardHighlightingChanged);
+export default React.memo(Placecard, isPlacecardHighlightingChanged);
 
 

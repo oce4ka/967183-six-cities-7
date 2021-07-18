@@ -5,9 +5,13 @@ export const ActionType = {
   LOAD_OFFERS: 'data/loadOffers',
   LOAD_OFFER: 'data/loadOffer',
   LOAD_OFFERS_NEARBY: 'data/loadOffersNearby',
+  LOAD_OFFERS_FAVORITES: 'data/loadOffersFavorites',
   LOAD_REVIEWS: 'data/loadReviews',
   LOGOUT: 'user/logout',
   SET_AUTHORIZATION_DATA: 'user/setAuthorizationData',
+  CHANGE_OFFER_FAVORITES_STATUS: 'data/changeOfferIsFavoriteStatus',
+  REDIRECT_TO_ROUTE: 'seek/redirectToRoute',
+  RESET_FAVORITES: 'data/resetFavorites',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -26,6 +30,16 @@ export const loadOffersNearby = createAction(ActionType.LOAD_OFFERS_NEARBY, (off
   payload: offers,
 }));
 
+export const loadOffersFavorites = createAction(ActionType.LOAD_OFFERS_FAVORITES, (offers) => ({
+  payload: offers,
+}));
+
+export const changeOfferIsFavoriteStatus = createAction(ActionType.CHANGE_OFFER_FAVORITES_STATUS, (offer) => ({
+  payload: offer,
+}));
+
+export const resetFavorites = createAction(ActionType.RESET_FAVORITES);
+
 export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
   payload: reviews,
 }));
@@ -40,4 +54,7 @@ export const setAuthorizationData = createAction(ActionType.SET_AUTHORIZATION_DA
 
 export const logout = createAction(ActionType.LOGOUT);
 
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
+  payload: url,
+}));
 

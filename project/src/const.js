@@ -23,6 +23,8 @@ export const APIRoute = {
   LOGOUT: '/logout',
   NEARBY: '/hotels/: hotel_id/nearby',
   REVIEWS: '/comments/: hotel_id',
+  FAVORITES: '/favorite',
+  FAVORITES_ADD: '/favorite/: hotel_id/: status',
 };
 
 export const AuthorizationStatus = {
