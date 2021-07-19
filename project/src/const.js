@@ -61,4 +61,9 @@ export const Cities = [
   {name: 'Dusseldorf', coords: [51.22172, 6.77616], zoom: 13},
 ];
 
+export const ErrorMessages = {
+  SERVER_ERROR: 'Damn gerbils have stopped running again! Someone has been dispatched to poke them with a sharp stick.',
+
+};
+
 export default Settings;

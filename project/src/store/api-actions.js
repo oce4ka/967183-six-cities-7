@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import {loadOffers, loadOffersNearby, loadOffersFavorites, loadOffer, loadReviews, setAuthorizationData, logout as closeSession, redirectToRoute, changeOfferIsFavoriteStatus, resetFavorites} from './action';
-import {APIRoute, AppRoute} from '../const';
+import {loadOffers, loadOffersNearby, loadOffersFavorites, loadOffer, loadReviews, setAuthorizationData, logout as closeSession, redirectToRoute, changeOfferIsFavoriteStatus, resetFavorites, setError} from './action';
+import {APIRoute, AppRoute, ErrorMessages} from '../const';
 
 // todo: В случае недоступности сервера отображается информационное сообщение. Дизайн сообщения остаётся на усмотрение разработчика.
 
@@ -8,7 +8,8 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(loadOffers(data)))
     .catch((error) => {
-      console.log(error);
+      dispatch(loadOffers([]));
+      dispatch(setError(ErrorMessages.SERVER_ERROR));
     })
 );
 
@@ -18,6 +19,7 @@ export const fetchOffersNearby = (currentOfferId) => (dispatch, _getState, api) 
     .catch((error) => {
       dispatch(loadOffersNearby([]));
       console.log(error);
+      dispatch(setError(''));
     })
 );
 
@@ -42,7 +44,9 @@ export const fetchOffer = (currentOfferId) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadOffer(data)))
     .catch((error) => {
       dispatch(loadOffer({}));
-      console.log(error);
+      if(error.response.status === 404){
+        return dispatch(redirectToRoute(AppRoute.PAGE404));
+      }
     })
 );
 

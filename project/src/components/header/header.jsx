@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -5,10 +6,13 @@ import {Link} from 'react-router-dom';
 import {isUserLoggedIn} from '../../utils/check-auth';
 import {logout} from '../../store/api-actions';
 import {getAuthInfo, getAuthorizationStatus} from '../../store/user/selectors';
+import {getErrorMessage} from '../../store/seek-process/selectors';
 import {AppRoute} from '../../const';
 
 function Header(props) {
-  const {authorizationStatus, onLogOut, email = ''} = props;
+  const {authorizationStatus, onLogOut, email = '', errorText} = props;
+
+  console.log(errorText);
 
   const handleLogOut = (evt) => {
     evt.preventDefault();
@@ -17,6 +21,9 @@ function Header(props) {
 
   return (
     <header className="header">
+      <div className="popup-error">
+        {errorText}
+      </div>
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
@@ -52,17 +59,18 @@ function Header(props) {
   );
 }
 
-
 Header.propTypes = {
   //isUserLoggedIn: PropTypes.bool,
   authorizationStatus: PropTypes.string.isRequired,
   onLogOut: PropTypes.func.isRequired,
   email: PropTypes.string,
+  errorText: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
   email: getAuthInfo(state).email,
+  errorText: getErrorMessage(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

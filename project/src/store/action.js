@@ -12,6 +12,7 @@ export const ActionType = {
   CHANGE_OFFER_FAVORITES_STATUS: 'data/changeOfferIsFavoriteStatus',
   REDIRECT_TO_ROUTE: 'seek/redirectToRoute',
   RESET_FAVORITES: 'data/resetFavorites',
+  SET_ERROR: 'seek/setError',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -56,5 +57,8 @@ export const logout = createAction(ActionType.LOGOUT);
 
 export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
   payload: url,
+}));
+export const setError = createAction(ActionType.SET_ERROR, (data) => ({
+  payload: data,
 }));
 

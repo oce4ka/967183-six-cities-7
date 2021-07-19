@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import axios from 'axios';
 
 const BACKEND_URL = 'https://7.react.pages.academy/six-cities';
@@ -24,7 +23,6 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    //console.log(response.status);
     if (response.status === HttpCode.UNAUTHORIZED) {
       onUnauthorized();
     }
@@ -32,7 +30,7 @@ export const createAPI = (onUnauthorized) => {
     throw err;
   };
 
-  api.interceptors.request.use((config) => {
+  api.interceptors.request.use((config) => { // refresh token before requesting
     const freshToken = localStorage.getItem('token') ?? '';
     config.headers = {
       'x-token': freshToken,
