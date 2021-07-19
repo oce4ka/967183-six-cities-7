@@ -7,7 +7,7 @@ function ReviewList(props) {
   const {reviews} = props;
   const reviewsCount = reviews.length;
   return (
-    reviewsCount &&
+    !!reviewsCount && // !! - to avoid "0"
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
       <ul className="reviews__list">

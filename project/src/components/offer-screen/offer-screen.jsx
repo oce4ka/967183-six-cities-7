@@ -18,6 +18,7 @@ import {getAuthorizationStatus} from '../../store/user/selectors';
 import {getOffer, getOfferLoadedStatus, getOffersNearby, getOffersNearbyLoadedStatus} from '../../store/offer-data/selectors';
 import {getReviews, getReviewsLoadedStatus} from '../../store/review-data/selectors';
 import {useDispatch, useSelector} from 'react-redux';
+import Page404Screen from '../page404-screen/page404-screen';
 
 function OfferScreen() {
 
@@ -32,8 +33,10 @@ function OfferScreen() {
   const reviews = useSelector(getReviews);
   const isReviewsLoaded = useSelector(getReviewsLoadedStatus);
 
+  const checkDataStatus = () => (isOfferLoaded && isOffersNearbyLoaded && isReviewsLoaded);
+
   const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0, 0);
-  useScrollToTop(currentOfferId, true);
+  useScrollToTop(offer, true);
 
   const dispatch = useDispatch();
 
@@ -46,18 +49,17 @@ function OfferScreen() {
     onPageLoad(currentOfferId);
   }, [currentOfferId, dispatch]);
 
-  if (!isOfferLoaded || !isOffersNearbyLoaded || !isReviewsLoaded) {
+  if (!checkDataStatus()) {
     return (
       <LoadingScreen/>
     );
   }
 
-  /* todo: never??? Check!
-  if (offer === undefined) {
+  if (Object.keys(offer).length === 0) { //if offer object is empty
     return (
-      <Redirect to={AppRoute.PAGE404}/>
+      <Page404Screen/>
     );
-  }*/
+  }
 
   return (
     <Page>

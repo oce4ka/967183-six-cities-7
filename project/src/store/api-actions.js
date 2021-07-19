@@ -14,8 +14,8 @@ export const fetchOffersNearby = (currentOfferId) => (dispatch, _getState, api) 
   api.get(APIRoute.NEARBY.replace(': hotel_id', currentOfferId))
     .then(({data}) => dispatch(loadOffersNearby(data)))
     .catch((error) => {
+      dispatch(loadOffersNearby([]));
       console.log(error);
-      dispatch(redirectToRoute(AppRoute.PAGE404)); // Todo: to find more beautiful way
     })
 );
 
@@ -39,7 +39,7 @@ export const fetchOffer = (currentOfferId) => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFER.replace(': id', currentOfferId))
     .then(({data}) => dispatch(loadOffer(data)))
     .catch((error) => {
-      dispatch(redirectToRoute(AppRoute.PAGE404)); // Todo: doesn't work
+      dispatch(loadOffer({}));
       console.log(error);
     })
 );
@@ -48,6 +48,7 @@ export const fetchReviews = (currentOfferId) => (dispatch, _getState, api) => (
   api.get(APIRoute.REVIEWS.replace(': hotel_id', currentOfferId))
     .then(({data}) => dispatch(loadReviews(data)))
     .catch((error) => {
+      dispatch(loadReviews([]));
       console.log(error);
     })
 );
