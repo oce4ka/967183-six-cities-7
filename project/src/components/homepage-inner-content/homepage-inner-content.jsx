@@ -10,10 +10,9 @@ import useScrollToTop from '../../hooks/use-scroll-to-top';
 
 function HomepageInnerContent(props) {
   const {offersArray, currentCity} = props;
-  const showPremium = true;
   const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0, 0);
   const [{offersArraySorted, sortingPayload, changeSortingPayload}] = useOffersSorting(offersArray);
-  const elementToScrollRef = useScrollToTop(offersArray);
+  const elementToScrollRef = useScrollToTop(currentCity);
 
   return (
     <div className="cities">
@@ -30,7 +29,6 @@ function HomepageInnerContent(props) {
             setActivePlace={setActivePlace}
             activeMarkerId={activeMarkerId}
             offersArray={offersArraySorted}
-            showPremium={showPremium}
           />
         </section>
         <div className="cities__right-section">

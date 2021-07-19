@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer-screen/offer.prop';
 import {Link} from 'react-router-dom';
-import convertStarsToPercent from '../../utils/convert-stars-to-percent';
+import convertRaitingToStars from '../../utils/convert-raiting-to-stars';
 import useAddToFavorites from '../../hooks/use-add-to-favorites';
+import {TypesOfProperty} from '../../const';
 
 function PlacecardInfo(props) {
   const {offer, className = ''} = props;
@@ -27,14 +28,14 @@ function PlacecardInfo(props) {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${convertStarsToPercent(offer.rating)}%`}}></span>
+          <span style={{width: `${convertRaitingToStars(offer.rating)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <h2 className="place-card__name">
         <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
       </h2>
-      <p className="place-card__type">{offer.type}</p>
+      <p className="place-card__type">{TypesOfProperty[offer.type]}</p>
     </div>
   );
 }

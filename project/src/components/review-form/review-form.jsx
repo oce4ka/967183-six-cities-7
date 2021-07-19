@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getOffer} from '../../store/offer-data/selectors';
 import {addReview} from '../../store/api-actions';
+import checkReviewValidation from '../../utils/check-review-validation';
+import {MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH} from '../../const';
 
 function ReviewForm() {
   const reviewInitialState = {
@@ -15,19 +17,28 @@ function ReviewForm() {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (offerId, commentPostObject) => {
+  const onSubmit = async (offerId, commentPostObject) => {
     dispatch(addReview(offerId, commentPostObject));
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
+    const formElements = evt.target.elements;
+    for (const formElement of formElements) {
+      formElement.readOnly = true;
+    }
     const commentPost = {
       comment: review.textReview,
       rating: review.starRating,
     };
-    onSubmit(currentOffer, commentPost);
+    await onSubmit(currentOffer, commentPost);
     setReview(reviewInitialState);
+    for (const formElement of formElements) {
+      formElement.readOnly = false;
+    }
   };
+
+  // todo: В случае возникновения ошибки следует уведомить пользователя. Способ отображения ошибки остаётся на усмотрение разработчика.
 
   return (
     <form
@@ -63,14 +74,14 @@ function ReviewForm() {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b style={(review.charsCount < 50) ? {color: 'red'} : {color: 'green'}} className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with <b style={(checkReviewValidation(review)) ? {color: 'green'} : {color: 'red'}} className="reviews__text-amount">at least {MIN_REVIEW_LENGTH} and at most {MAX_REVIEW_LENGTH} characters</b>.
           <br/>
-          You used {review.charsCount} characters
+          You used {review.charsCount} characters.
           <br/>
           <br/>
           <br/>
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={(review.charsCount < 50 || !review.starRating) ? 'disabled' : ''}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={(!checkReviewValidation(review) || !review.starRating) ? 'disabled' : ''}>Submit</button>
       </div>
     </form>
   );

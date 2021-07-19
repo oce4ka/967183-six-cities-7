@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, {useRef, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,6 +5,7 @@ import offerProp from '../offer-screen/offer.prop';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Settings, {AppRoute, Cities} from '../../const';
+// todo: refactoring - needed?
 
 let currentMarkerFromHoveredPlacecard;
 
@@ -19,7 +19,6 @@ const drawMapAnchors = ({map, offersArray, currentOffer, setActiveMarker, marker
     iconSize: [27, 39],
   });
   let hasHoveredPlacecard = false;
-
   offersArray.forEach((offer) => {
     if (currentOffer && (offer.id === currentOffer.id)) {
       currentMarkerFromHoveredPlacecard && map.removeLayer(currentMarkerFromHoveredPlacecard);
@@ -48,13 +47,13 @@ const drawMapAnchors = ({map, offersArray, currentOffer, setActiveMarker, marker
   });
 };
 
-
 function Map(props) {
-  const {className, offersArray, activePlaceId, currentCity, setActiveMarker, removeMarkersOnUpdate = false} = props;
+  const {className, offersArray, activePlaceId, currentCity, setActiveMarker, removeMarkersOnUpdate = false, effectFly = true, currentStaticMarkerCoords = []} = props;
   const currentOffer = offersArray.filter((offer) => (offer.id === activePlaceId))[0]; // get array with current offer only
   const mapRef = useRef(null);
   const [map, setMap] = useState(null); // keep map instance in state
   const [markersLayer, setMarkersLayer] = useState(null); // keep map instance in state
+  const [staticMarkerLayer, setStaticMarkerLayer] = useState(null); // keep map instance in state
   const history = useHistory();
 
   useEffect(() => { // init map
@@ -75,13 +74,13 @@ function Map(props) {
         .addTo(mapInstance);
       setMap(mapInstance); // send map instance to state
     } else {
-      map.flyTo(city.coords, city.zoom);
+      effectFly ? map.flyTo(city.coords, city.zoom) : map.panTo(city.coords, city.zoom);
     }
     return () => {
       markersLayer && markersLayer.clearLayers(); // clear markers
     };
 
-  }, [offersArray, currentCity, map, removeMarkersOnUpdate, markersLayer, currentOffer, setActiveMarker]);
+  }, [offersArray, currentCity, map, removeMarkersOnUpdate, markersLayer, currentOffer, setActiveMarker, effectFly]);
 
   useEffect(() => {
     map && setMarkersLayer(leaflet.layerGroup().addTo(map));
@@ -90,6 +89,24 @@ function Map(props) {
   useEffect(() => {
     markersLayer && drawMapAnchors({map, offersArray, currentOffer, setActiveMarker, markersLayer, history});
   }, [activePlaceId, currentOffer, map, offersArray, setActiveMarker, markersLayer, history]);
+
+  // Adds static marker
+  const currentCustomIconBig = leaflet.icon({
+    iconUrl: Settings.URL_MARKER_CURRENT,
+    iconSize: [41, 60],
+  });
+
+  if (map && currentStaticMarkerCoords.length && !staticMarkerLayer) {
+    map && setStaticMarkerLayer(leaflet.layerGroup().addTo(map));
+  }
+
+  useEffect(()=>{
+    if (staticMarkerLayer) {
+      staticMarkerLayer && staticMarkerLayer.clearLayers(); // clear previous marker
+      leaflet.marker(currentStaticMarkerCoords, {icon: currentCustomIconBig, zIndexOffset: 9999}).addTo(staticMarkerLayer);
+    }
+  });
+
 
   return (
     <section ref={mapRef} className={className}></section>
@@ -103,6 +120,8 @@ Map.propTypes = {
   currentCity: PropTypes.string.isRequired,
   setActiveMarker: PropTypes.func,
   removeMarkersOnUpdate: PropTypes.bool,
+  effectFly: PropTypes.bool,
+  currentStaticMarkerCoords: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default React.memo(Map);

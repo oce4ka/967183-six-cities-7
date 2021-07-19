@@ -5,12 +5,12 @@ import PlacecardInfo from '../placecard-info/placecard-info';
 import PlacecardImage from '../placecard-image/placecard-image';
 
 function Placecard(props) {
-  const {offer, onMouseEnter, onMouseLeave, isForFavorites = false, showPremium = false, activeMarkerId} = props;
+  const {offer, onMouseEnter, onMouseLeave, isForFavorites = false, activeMarkerId} = props;
   const styleOfferWithHoveredMarker = {opacity: 0.6};
 
   return (
     <article style={(activeMarkerId === offer.id) ? styleOfferWithHoveredMarker : null} className={`${isForFavorites ? 'favorites__card' : 'cities__place-card'} place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      {showPremium && offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
+      {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <PlacecardImage offer={offer} isForFavorites={isForFavorites}/>
       <PlacecardInfo className={isForFavorites ? 'favorites__card-info' : ''} offer={offer}/>
     </article>
@@ -21,7 +21,6 @@ Placecard.propTypes = {
   offer: offerProp,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
-  showPremium: PropTypes.bool,
   isForFavorites: PropTypes.bool,
   activeMarkerId: PropTypes.number,
 };

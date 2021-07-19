@@ -33,6 +33,18 @@ export const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
+export const TypesOfProperty = {
+  'apartment': 'Apartment',
+  'room': 'Private Room',
+  'house': 'House',
+  'hotel': 'Hotel',
+};
+
+export const MAX_IMAGE_COUNT = 6;
+export const MAX_REVIEWS = 10;
+export const MIN_REVIEW_LENGTH = 50;
+export const MAX_REVIEW_LENGTH = 300;
+
 export const SortOffersOptions = {
   PRICE_DESCENDING: 'Price: high to low',
   PRICE_ASCENDING: 'Price: low to high',

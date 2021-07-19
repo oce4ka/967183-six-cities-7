@@ -1,5 +1,5 @@
 import React from 'react';
-import convertStarsToPercent from '../../utils/convert-stars-to-percent';
+import convertRaitingToPercent from '../../utils/convert-raiting-to-percent';
 import convertIsoDateToStrings from '../../utils/convert-iso-date-to-strings';
 import PropTypes from 'prop-types';
 import reviewProp from './review.prop';
@@ -18,7 +18,7 @@ function ReviewItem(props) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${convertStarsToPercent(reviewsItem.rating)}%`}}></span>
+            <span style={{width: `${convertRaitingToPercent(reviewsItem.rating)}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

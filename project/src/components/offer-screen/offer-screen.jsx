@@ -36,7 +36,7 @@ function OfferScreen() {
   const checkDataStatus = () => (isOfferLoaded && isOffersNearbyLoaded && isReviewsLoaded);
 
   const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = useMapInteraction(0, 0);
-  useScrollToTop(offer, true);
+  useScrollToTop(currentOfferId, true);
 
   const dispatch = useDispatch();
 
@@ -80,6 +80,8 @@ function OfferScreen() {
             activePlaceId={activePlaceId}
             offersArray={offersArray}
             currentCity={offer.city.name}
+            effectFly={false}
+            currentStaticMarkerCoords={[offer.location.latitude, offer.location.longitude]}
           />
         </section>
         <div className="container">

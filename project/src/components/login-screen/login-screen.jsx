@@ -10,6 +10,10 @@ import {isUserLoggedIn} from '../../utils/check-auth';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import {changeCity} from '../../store/action';
 
+/* todo: логин и пароль могут быть любыми, но не пустыми.
+todo: В поле «логин» должен вводится корректный email.
+todo: Пароль не может состоять из одних пробелов.
+ */
 
 function LoginScreen() {
 

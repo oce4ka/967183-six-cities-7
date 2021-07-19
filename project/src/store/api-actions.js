@@ -2,6 +2,8 @@
 import {loadOffers, loadOffersNearby, loadOffersFavorites, loadOffer, loadReviews, setAuthorizationData, logout as closeSession, redirectToRoute, changeOfferIsFavoriteStatus, resetFavorites} from './action';
 import {APIRoute, AppRoute} from '../const';
 
+// todo: В случае недоступности сервера отображается информационное сообщение. Дизайн сообщения остаётся на усмотрение разработчика.
+
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(loadOffers(data)))
