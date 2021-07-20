@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import ReviewItem from '../review-item/review-item';
 import PropTypes from 'prop-types';
 import reviewProp from '../review-item/review.prop';
@@ -8,6 +8,7 @@ import {Settings} from '../../const';
 function ReviewList(props) {
   const {reviews} = props;
   const reviewsCount = reviews.length;
+
   return (
     !!reviewsCount && // !! - to avoid "0"
     <section className="property__reviews reviews">
