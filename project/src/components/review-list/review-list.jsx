@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import ReviewItem from '../review-item/review-item';
 import PropTypes from 'prop-types';
 import reviewProp from '../review-item/review.prop';
