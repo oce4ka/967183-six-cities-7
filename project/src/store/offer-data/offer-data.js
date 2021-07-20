@@ -45,8 +45,12 @@ const offerData = createReducer(initialState, (builder) => {
         state.offersFavorites = state.offersFavorites.filter((offer) => (offer.id !== offerUpdated.id));
       }
 
-      const indexInOffersToUpdate = state.offers.findIndex((offer) => (offer.id === offerUpdated.id));
-      state.offers[indexInOffersToUpdate].isFavorite = !state.offers[indexInOffersToUpdate].isFavorite;
+      [state.offers, state.offersNearby].forEach((offersArray) => {
+        const indexInOffers = offersArray.findIndex((offer) => (offer.id === offerUpdated.id));
+        if (indexInOffers !== -1) {
+          offersArray[indexInOffers].isFavorite = !offersArray[indexInOffers].isFavorite;
+        }
+      });
 
       if (state.offer.id === offerUpdated.id) {
         state.offer.isFavorite = !state.offer.isFavorite;
