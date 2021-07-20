@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,8 +11,6 @@ import {AppRoute} from '../../const';
 function Header(props) {
   const {authorizationStatus, onLogOut, email = '', errorText} = props;
 
-  console.log(errorText);
-
   const handleLogOut = (evt) => {
     evt.preventDefault();
     onLogOut();
@@ -21,9 +18,7 @@ function Header(props) {
 
   return (
     <header className="header">
-      <div className="popup-error">
-        {errorText}
-      </div>
+      {errorText && <div className="alert">{errorText}</div>}
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">

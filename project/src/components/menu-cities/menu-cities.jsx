@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useHistory} from 'react-router-dom';
 
 function MenuCities(props) {
   const {cityPlaceArray, currentCity, onChangeCity} = props;
 
-  const history = useHistory();
   const handleCityClick = (evt, cityPlace) => {
     evt.preventDefault();
     onChangeCity(cityPlace);
-    //history.push(`#${cityPlace}`);
-    history.push(); // todo: how to change city to old one when we click back button?
+    //history.push(`#${cityPlace}`); // todo: how to change city to old one when we click back button? No such requirement in the task
+    //history.push();
   };
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {createReducer} from '@reduxjs/toolkit';
 import {loadOffer, loadOffersNearby, loadOffers, loadOffersFavorites, changeOfferIsFavoriteStatus, resetFavorites} from '../action';
 import convertKeysToCamel from '../../utils/convert-keys-to-camel';

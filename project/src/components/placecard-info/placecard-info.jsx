@@ -19,7 +19,6 @@ function PlacecardInfo(props) {
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
         <button onClick={handleClick} className={`place-card__bookmark-button button${offer.isFavorite ? ' place-card__bookmark-button--active' : ''}`} type="button">
-          {/* Todo: favorites */}
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>

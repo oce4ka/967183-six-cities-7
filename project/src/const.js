@@ -5,6 +5,11 @@ export const Settings = {
   DEFAULT_CITY: 'Paris',
   URL_MARKER_DEFAULT: 'img/pin.svg',
   URL_MARKER_CURRENT: 'img/pin-active.svg',
+
+  MAX_IMAGE_COUNT: 6,
+  MAX_REVIEWS: 10,
+  MIN_REVIEW_LENGTH: 50,
+  MAX_REVIEW_LENGTH: 300,
 };
 
 export const AppRoute = {
@@ -40,10 +45,6 @@ export const TypesOfProperty = {
   'hotel': 'Hotel',
 };
 
-export const MAX_IMAGE_COUNT = 6;
-export const MAX_REVIEWS = 10;
-export const MIN_REVIEW_LENGTH = 50;
-export const MAX_REVIEW_LENGTH = 300;
 
 export const SortOffersOptions = {
   PRICE_DESCENDING: 'Price: high to low',
@@ -62,8 +63,11 @@ export const Cities = [
 ];
 
 export const ErrorMessages = {
-  SERVER_ERROR: 'Damn gerbils have stopped running again! Someone has been dispatched to poke them with a sharp stick.',
-
+  SERVER_ERROR: 'Server error. Please, try again later.',
+  NEARBY_ERROR: 'Related offers error. Please, try again later.',
+  AUTH_REQUIRED: 'Authentication error. You need to sign in first.',
+  BAD_REQUEST: 'Bad request of offer reviews. Please, try again later.',
+  AUTH_ERROR: 'Authentication error. Please, try again.',
 };
 
 export default Settings;

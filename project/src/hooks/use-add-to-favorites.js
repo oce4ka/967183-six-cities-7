@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAuthorizationStatus} from '../store/user/selectors';
@@ -10,7 +11,9 @@ const useAddToFavorites = (offerId, status) => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
 
+
   const handleClick = () => {
+    console.log('setStatus', status); // todo: не перерисовывается карточка в nearby, менять в массиве nearby в state
     (!isUserLoggedIn(authorizationStatus)) ? history.push(AppRoute.LOGIN) : dispatch(setOfferFavoritesStatus(offerId, status));
   };
   return handleClick;

@@ -1,8 +1,8 @@
-import {MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH} from '../const';
+import {Settings} from '../const';
 
 const checkReviewValidation = (review) => {
   const charsCount = review.charsCount;
-  if (charsCount >= MIN_REVIEW_LENGTH && charsCount <= MAX_REVIEW_LENGTH) {
+  if (charsCount >= Settings.MIN_REVIEW_LENGTH && charsCount <= Settings.MAX_REVIEW_LENGTH) {
     return true;
   } else {
     return false;

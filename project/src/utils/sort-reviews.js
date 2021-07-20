@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const sortReviews = ([...reviews]) => {
   const reviewsSorted = reviews.sort((j, k) => {
     if (Date.parse(j.date) > Date.parse(k.date)) {

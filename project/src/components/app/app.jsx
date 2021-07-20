@@ -3,7 +3,7 @@ import HomepageScreen from '../homepage-screen/homepage-screen';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {connect} from 'react-redux'; //todo: replace connect to hooks?
+import {connect} from 'react-redux';
 import PrivateRoute from '../private-route/private-route';
 import {getDataLoadedStatus} from '../../store/offer-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
@@ -7,6 +6,11 @@ import Main from '../main/main';
 
 function Page404Screen() {
   const history = useHistory();
+
+  const clickHandle = (evt) => {
+    evt.preventDefault();
+    history.goBack();
+  };
 
   return (
     <Page className="page--favorites-empty">
@@ -17,7 +21,7 @@ function Page404Screen() {
             <div className="favorites__status-wrapper" style={{backgroundImage: 'url(/img/404-error.svg)'}}>
               <b className="favorites__status">404. Not Found.</b>
               <Link to={'/'} className="favorites__status-description">Return home</Link>
-              <button onClick={() => history.goBack()} className="favorites__status-description">Return back</button>
+              <a href="#back" onClick={clickHandle} className="favorites__status-description">Return back</a>
             </div>
           </section>
         </div>

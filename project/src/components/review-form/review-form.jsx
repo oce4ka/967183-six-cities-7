@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getOffer} from '../../store/offer-data/selectors';
 import {addReview} from '../../store/api-actions';
 import checkReviewValidation from '../../utils/check-review-validation';
-import {MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH} from '../../const';
+import {Settings} from '../../const';
 
 function ReviewForm() {
   const reviewInitialState = {
@@ -37,8 +37,6 @@ function ReviewForm() {
       formElement.readOnly = false;
     }
   };
-
-  // todo: В случае возникновения ошибки следует уведомить пользователя. Способ отображения ошибки остаётся на усмотрение разработчика.
 
   return (
     <form
@@ -74,7 +72,7 @@ function ReviewForm() {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with <b style={(checkReviewValidation(review)) ? {color: 'green'} : {color: 'red'}} className="reviews__text-amount">at least {MIN_REVIEW_LENGTH} and at most {MAX_REVIEW_LENGTH} characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with <b style={(checkReviewValidation(review)) ? {color: 'green'} : {color: 'red'}} className="reviews__text-amount">at least {Settings.MIN_REVIEW_LENGTH} and at most {Settings.MAX_REVIEW_LENGTH} characters</b>.
           <br/>
           You used {review.charsCount} characters.
           <br/>

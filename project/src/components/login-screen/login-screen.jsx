@@ -1,4 +1,4 @@
-import {useRef, React} from 'react';
+import {useRef, React, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Page from '../page/page';
 import Main from '../main/main';
@@ -8,29 +8,36 @@ import {Redirect} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {isUserLoggedIn} from '../../utils/check-auth';
 import {getAuthorizationStatus} from '../../store/user/selectors';
+import {getErrorMessage} from '../../store/seek-process/selectors';
 import {changeCity} from '../../store/action';
-
-/* todo: логин и пароль могут быть любыми, но не пустыми.
-todo: В поле «логин» должен вводится корректный email.
-todo: Пароль не может состоять из одних пробелов.
- */
+import {validateAuth} from '../../utils/validate-auth';
 
 function LoginScreen() {
 
   const loginRef = useRef();
   const passwordRef = useRef();
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const authorizationStatus = useSelector(getAuthorizationStatus);
+  const serverErrorMessage = useSelector(getErrorMessage);
 
   const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    setErrorMessage('');
+    const email = loginRef.current.value;
+    const password = passwordRef.current.value;
 
-    dispatch(login({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
-    }));
+    if (validateAuth({email, password})) {
+      dispatch(login({
+        login: email,
+        password: password,
+      }));
+    } else {
+      setErrorMessage('The email or password is incorrect.');
+    }
   };
 
   if (isUserLoggedIn(authorizationStatus)) {
@@ -58,6 +65,8 @@ function LoginScreen() {
                 <label className="visually-hidden">Password</label>
                 <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required/>
               </div>
+              {errorMessage && <div>{errorMessage}<br/></div>}
+              {serverErrorMessage && <div>{serverErrorMessage} Check your login and password again.</div>}
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>
           </section>
