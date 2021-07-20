@@ -49,7 +49,6 @@ function OfferPropertyInfo(props) {
       <div className="property__inside">
         <h2 className="property__inside-title">What&apos;s inside</h2>
         <ul className="property__inside-list">
-          {/* Todo: why " Do not use Array index in keys" */}
           {offer.goods.map((goodsItem) =>
             (
               <li key={goodsItem} className="property__inside-item">

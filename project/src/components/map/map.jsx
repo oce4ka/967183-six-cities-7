@@ -5,7 +5,6 @@ import offerProp from '../offer-screen/offer.prop';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Settings, {AppRoute, Cities} from '../../const';
-// todo: refactoring - needed?
 
 let currentMarkerFromHoveredPlacecard;
 
@@ -62,8 +61,8 @@ function Map(props) {
       const mapInstance = leaflet.map(mapRef.current, {
         center: city.coords,
         zoom: city.zoom,
-        zoomControl: false,  // Todo: read
-        marker: true, // Todo: read
+        zoomControl: false, // zoom on scroll
+        marker: true,
       });
       mapInstance.setView(city.coords, city.zoom);
       mapInstance.scrollWheelZoom.disable();

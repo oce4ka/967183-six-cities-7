@@ -13,6 +13,7 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: 'seek/redirectToRoute',
   RESET_FAVORITES: 'data/resetFavorites',
   SET_ERROR: 'seek/setError',
+  RESET_ERROR: 'seek/resetError',
 };
 
 export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
@@ -58,7 +59,10 @@ export const logout = createAction(ActionType.LOGOUT);
 export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
   payload: url,
 }));
+
 export const setError = createAction(ActionType.SET_ERROR, (data) => ({
   payload: data,
 }));
+
+export const resetError = createAction(ActionType.RESET_ERROR);
 

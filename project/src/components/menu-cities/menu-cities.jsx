@@ -7,8 +7,6 @@ function MenuCities(props) {
   const handleCityClick = (evt, cityPlace) => {
     evt.preventDefault();
     onChangeCity(cityPlace);
-    //history.push(`#${cityPlace}`); // todo: how to change city to old one when we click back button? No such requirement in the task
-    //history.push();
   };
 
   return (

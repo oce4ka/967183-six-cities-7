@@ -3,18 +3,20 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {isUserLoggedIn} from '../../utils/check-auth';
-import {logout} from '../../store/api-actions';
+import {logout, resetError} from '../../store/api-actions';
 import {getAuthInfo, getAuthorizationStatus} from '../../store/user/selectors';
 import {getErrorMessage} from '../../store/seek-process/selectors';
-import {AppRoute} from '../../const';
+import Settings, {AppRoute} from '../../const';
 
 function Header(props) {
-  const {authorizationStatus, onLogOut, email = '', errorText} = props;
+  const {authorizationStatus, onLogOut, email = '', errorText, onErrorIsAppeared} = props;
 
   const handleLogOut = (evt) => {
     evt.preventDefault();
     onLogOut();
   };
+
+  errorText && setTimeout(() => {onErrorIsAppeared();}, Settings.MAX_TIME_SHOW_ERROR); //remove error message after it has been shown
 
   return (
     <header className="header">
@@ -58,6 +60,7 @@ Header.propTypes = {
   //isUserLoggedIn: PropTypes.bool,
   authorizationStatus: PropTypes.string.isRequired,
   onLogOut: PropTypes.func.isRequired,
+  onErrorIsAppeared: PropTypes.func.isRequired,
   email: PropTypes.string,
   errorText: PropTypes.string,
 };
@@ -71,6 +74,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onLogOut() {
     dispatch(logout());
+  },
+  onErrorIsAppeared() {
+    dispatch(resetError());
   },
 });
 

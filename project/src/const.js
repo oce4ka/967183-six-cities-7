@@ -1,15 +1,13 @@
-/* Todo: to make refactoring and add AppRoutes */
-
 export const Settings = {
   CITY_PLACES: ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'],
   DEFAULT_CITY: 'Paris',
   URL_MARKER_DEFAULT: 'img/pin.svg',
   URL_MARKER_CURRENT: 'img/pin-active.svg',
-
   MAX_IMAGE_COUNT: 6,
   MAX_REVIEWS: 10,
   MIN_REVIEW_LENGTH: 50,
   MAX_REVIEW_LENGTH: 300,
+  MAX_TIME_SHOW_ERROR: 3000,
 };
 
 export const AppRoute = {
@@ -44,7 +42,6 @@ export const TypesOfProperty = {
   'house': 'House',
   'hotel': 'Hotel',
 };
-
 
 export const SortOffersOptions = {
   PRICE_DESCENDING: 'Price: high to low',

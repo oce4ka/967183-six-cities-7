@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, setError} from '../action';
+import {changeCity, setError, resetError} from '../action';
 import {Settings} from '../../const';
 
 const initialState = {
@@ -14,6 +14,9 @@ const seekProcess = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.errorText = action.payload;
+    })
+    .addCase(resetError, (state, action) => {
+      state.errorText = '';
     });
 });
 

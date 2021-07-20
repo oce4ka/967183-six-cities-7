@@ -22,7 +22,6 @@ import Page404Screen from '../page404-screen/page404-screen';
 
 function OfferScreen() {
 
-  /* Todo: correct? Or better to send props as I did with currentCity and Cities? */
   const currentOfferId = Number(useLocation().pathname.replace('/offer/', '')); // get id from url
 
   const authorizationStatus = useSelector(getAuthorizationStatus);
