@@ -8,6 +8,7 @@ import {Settings} from '../../const';
 function ReviewList(props) {
   const {reviews} = props;
   const reviewsCount = reviews.length;
+
   return (
     !!reviewsCount && // !! - to avoid "0"
     <section className="property__reviews reviews">
