@@ -100,6 +100,9 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       if (error.response.status === 400) {
         return dispatch(setError(ErrorMessages.AUTH_ERROR));
       }
+      if (error.response.status === 401) {
+        return dispatch(setError(ErrorMessages.AUTH_ERROR));
+      }
       if (error.response.status === 404) {
         return dispatch(setError(ErrorMessages.SERVER_ERROR));
       }
@@ -110,6 +113,9 @@ export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data}) => dispatch(setAuthorizationData(data)))
     .catch((error) => {
+      dispatch(closeSession()); // if old token is in local storage
+      dispatch(resetFavorites());
+
       if (error.response.status === 401) {
         dispatch(setError(ErrorMessages.AUTH_ERROR));
         return dispatch(redirectToRoute(AppRoute.LOGIN));

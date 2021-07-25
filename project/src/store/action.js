@@ -9,6 +9,7 @@ export const ActionType = {
   LOAD_REVIEWS: 'data/loadReviews',
   LOGOUT: 'user/logout',
   SET_AUTHORIZATION_DATA: 'user/setAuthorizationData',
+  REQUIRED_AUTHORIZATION: 'user/requireAuthorization',
   CHANGE_OFFER_FAVORITES_STATUS: 'data/changeOfferIsFavoriteStatus',
   REDIRECT_TO_ROUTE: 'seek/redirectToRoute',
   RESET_FAVORITES: 'data/resetFavorites',
