@@ -3,7 +3,7 @@ import React from 'react';
 function LoadingScreen() {
   return (
     <React.Fragment>
-      <div className="cssload-dots">
+      <div data-testid="loader" className="cssload-dots">
         <div className="cssload-dot"></div>
         <div className="cssload-dot"></div>
         <div className="cssload-dot"></div>
