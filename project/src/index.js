@@ -10,6 +10,8 @@ import {checkAuth, fetchOffers, fetchOffersFavorites} from './store/api-actions'
 import {AuthorizationStatus} from './const';
 import getToken from './utils/get-token';
 import {redirect} from './store/middlewares/redirect';
+import browserHistory from './browser-history';
+import {Router as BrowserRouter} from 'react-router-dom';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -32,7 +34,9 @@ store.dispatch(fetchOffers());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter history={browserHistory}>
+        <App/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

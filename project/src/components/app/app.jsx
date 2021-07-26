@@ -1,7 +1,7 @@
 import React from 'react';
 import HomepageScreen from '../homepage-screen/homepage-screen';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {connect} from 'react-redux';
 import PrivateRoute from '../private-route/private-route';
@@ -23,29 +23,27 @@ function App(props) {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path={AppRoute.LOGIN}>
-          <LoginScreen/>
-        </Route>
-        <PrivateRoute
-          exact
-          authorizationStatus={authorizationStatus}
-          path={AppRoute.FAVORITES}
-          render={() => <FavoritesScreen/>}
-        >
-        </PrivateRoute>
-        <Route path={AppRoute.OFFER}>
-          <OfferScreen/>
-        </Route>
-        <Route path={AppRoute.ROOT} exact>
-          <HomepageScreen/>
-        </Route>
-        <Route>
-          <Page404Screen/>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route path={AppRoute.LOGIN}>
+        <LoginScreen/>
+      </Route>
+      <PrivateRoute
+        exact
+        authorizationStatus={authorizationStatus}
+        path={AppRoute.FAVORITES}
+        render={() => <FavoritesScreen/>}
+      >
+      </PrivateRoute>
+      <Route path={AppRoute.OFFER}>
+        <OfferScreen/>
+      </Route>
+      <Route path={AppRoute.ROOT} exact>
+        <HomepageScreen/>
+      </Route>
+      <Route>
+        <Page404Screen/>
+      </Route>
+    </Switch>
   );
 }
 
