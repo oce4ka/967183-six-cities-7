@@ -17,6 +17,7 @@ export const AppRoute = {
   CITYPLACE: '/:cityplace',
   ROOT: '/',
   PAGE404: '/404',
+  LOGOUT: '/logout',
 };
 
 export const APIRoute = {

@@ -8,7 +8,6 @@ import Page404Screen from './page404-screen';
 
 let history = null;
 let store = null;
-let fakeApp = null;
 
 describe('Component: Page404Screen', () => {
   beforeAll(() => {

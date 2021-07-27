@@ -1,11 +1,13 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
+import {screen} from '@testing-library/dom'
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {AppRoute} from '../../const'; //MAX_MISTAKE_COUNT,
+import {AppRoute} from '../../const';
 import App from './app';
+import * as Redux from 'react-redux';
 
 let history = null;
 let store = null;
@@ -276,24 +278,8 @@ describe('Application Routing', () => {
       }
     });
 
-    //const dispatch = jest.fn();
-    //const useDispatch = jest.spyOn(Redux, 'useDispatch');
-    //useDispatch.mockReturnValue(dispatch);
-
-    //global.scrollTo() = jest.fn();
-
-    //const elementToScrollRef = useScrollToTop('Amsterdam');
-    //const useScrollToTop = jest.fn();
-
-    /*
-    //elementToScrollRef.current = '<div></div>';
-    function mockGetRef(ref:any) {
-      this.contentRef = {offsetHeight: 100}
-    }
-    jest.spyOn(MyComp.prototype, 'getRef').mockImplementationOnce(mockGetRef);
-    const comp = mount(<MyComp />);
-    expect(comp.state('contentHeight')).toEqual(100);
-*/
+    const noop = () => {};
+    Object.defineProperty(window, 'scrollTo', { value: noop, writable: true });
 
     fakeApp = (
       <Provider store={store}>
@@ -304,29 +290,29 @@ describe('Application Routing', () => {
     );
   });
 
-  /*
+
   // Todo: валится тест для HomepageScreen и OfferScreen - ругается на хуки (в module 8 не нашла пока решения, возможно в следующем - 9 - модуле есть решение в демо проекте)
   it('should render "HomepageScreen" when user navigate to "/"', () => {
     history.push(AppRoute.ROOT);
     render(fakeApp);
 
-    expect(screen.getByText(/places to stay in/i)).toBeInTheDocument();
-    //expect(screen.getByText(new RegExp(`Можно допустить ${MAX_MISTAKE_COUNT}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(/2 places to stay in Paris/i)).toBeInTheDocument();
+    expect(screen.getByText(/Sort by/i)).toBeInTheDocument();
   });
 
-  /*
+
   it('should render "Offer" when user navigate to "/offer"', () => {
+    const dispatch = jest.fn();
+    const useDispatch = jest.spyOn(Redux, 'useDispatch');
+    useDispatch.mockReturnValue(dispatch);
     history.push(AppRoute.OFFER.replace(':id', 1));
     render(fakeApp);
 
-    //expect(screen.getByText(/inside/i)).toBeInTheDocument();
-    //expect(screen.getByText(/Попробовать ещё раз/i)).toBeInTheDocument();
-    //expect(screen.getByText(/У вас закончились все попытки. Ничего, повезёт в следующий раз!/i)).toBeInTheDocument();
+    expect(screen.getByText(/What's inside/i)).toBeInTheDocument();
+    expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reviews/i)).toBeInTheDocument();
+    expect(screen.getByText(/Other places in the neighbourhood/i)).toBeInTheDocument();
   });
-
-  //todo: LogOut - та же проблема с мокингом хуков
-   */
-
 
   it('should render "LoginScreen" when user navigate to "/login"', () => {
     history.push(AppRoute.LOGIN);

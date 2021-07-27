@@ -14,7 +14,7 @@ import {
   checkAuth,
   logout,
 } from './api-actions';
-import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
+import {APIRoute, AppRoute} from '../const';
 
 let api = null;
 

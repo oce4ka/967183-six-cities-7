@@ -43,7 +43,7 @@ function Header(props) {
                 isUserLoggedIn(authorizationStatus)
                 &&
                 <li className="header__nav-item">
-                  <Link className="header__nav-link" onClick={handleLogOut} to="/logout">
+                  <Link className="header__nav-link" onClick={handleLogOut} to={AppRoute.LOGOUT}>
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>
