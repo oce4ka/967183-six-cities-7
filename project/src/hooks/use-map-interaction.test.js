@@ -23,27 +23,4 @@ describe('Hook: useMapInteraction', () => {
     expect(typeof activePlaceId).toBe('number')
     expect(setActivePlace).toBeInstanceOf(Function);
   });
-
-
-  it('should be correctly change state', () => {
-    const expectedInitialPlaceId = [1, 2, 3];
-    const {result} = renderHook(
-      () => useMapInteraction(activePlaceIdInitial, activeMarkerIdInitial),
-    );
-
-    const [{activeMarkerId, setActiveMarker, activePlaceId, setActivePlace}] = result.current;
-    // const [initialAnswers] = result.current;
-    // let [,, handleAnswerChange] = result.current;
-
-    act(() => setActiveMarker(jest.fn(), [activeMarkerId]));
-    act(() => setActivePlace(jest.fn(), [activePlaceId]));
-
-    [,, handleAnswerChange] = result.current;
-    act(() => handleAnswerChange(3, true));
-
-    const [answers] = result.current;
-    expect(initialAnswers).toStrictEqual(expectedInitialAnswers);
-    expect(answers[1]).toBe(true);
-    expect(answers[3]).toBe(true);
-  });
 });
