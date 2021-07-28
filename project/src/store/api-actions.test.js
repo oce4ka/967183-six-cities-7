@@ -44,10 +44,12 @@ describe('Async operations', () => {
       });
   });
 
-  it('should make a correct API call to DELETE /login', () => {
+  it('should make a correct API call to DELETE /logout', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const logoutLoader = logout();
+
+    Storage.prototype.removeItem = jest.fn();
 
     apiMock
       .onDelete(APIRoute.LOGOUT)
@@ -65,6 +67,9 @@ describe('Async operations', () => {
           payload: undefined,
           type: ActionType.RESET_FAVORITES,
         });
+
+        expect(Storage.prototype.removeItem).toBeCalledTimes(1);
+        expect(Storage.prototype.removeItem).nthCalledWith(1, 'token');
       });
   });
 

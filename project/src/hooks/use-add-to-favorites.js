@@ -10,10 +10,10 @@ const useAddToFavorites = (offerId, status) => {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
 
-
   const handleClick = () => {
     (!isUserLoggedIn(authorizationStatus)) ? history.push(AppRoute.LOGIN) : dispatch(setOfferFavoritesStatus(offerId, status));
   };
+
   return handleClick;
 };
 

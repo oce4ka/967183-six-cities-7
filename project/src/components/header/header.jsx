@@ -24,7 +24,7 @@ function Header(props) {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link to="/" className="header__logo-link"><img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/></Link>
+            <Link to="/" data-testid="logo" className="header__logo-link"><img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/></Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

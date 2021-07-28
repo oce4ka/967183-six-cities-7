@@ -1,5 +1,6 @@
 import {renderHook, act} from '@testing-library/react-hooks';
 import useOffersSorting from './use-offers-sorting';
+import {SortOffersOptions} from '../const';
 
 let offers = null;
 describe('Hook: useOffersSorting', () => {
@@ -190,4 +191,22 @@ describe('Hook: useOffersSorting', () => {
     expect(typeof sortingPayload).toBe('string')
     expect(changeSortingPayload).toBeInstanceOf(Function);
   });
+
+  it('should be changed the sorted offers array on sorting option change', () => {
+    const {result} = renderHook(
+      () => useOffersSorting(offers),
+    );
+
+    const [{offersArraySorted, sortingPayload, changeSortingPayload}] = result.current;
+    const initialSortingPayload = sortingPayload;
+    act(() => changeSortingPayload(SortOffersOptions.PRICE_DESCENDING));
+
+    const [{offersArraySorted: offersArraySorted1, sortingPayload: sortingPayload1, changeSortingPayload: changeSortingPayload1}] = result.current;
+    expect(sortingPayload).toStrictEqual(SortOffersOptions.POPULAR);
+    expect(sortingPayload1).toStrictEqual(SortOffersOptions.PRICE_DESCENDING);
+    expect(offersArraySorted).toStrictEqual(offers);
+    expect(offersArraySorted1).not.toBe(offers);
+  });
+
+  // todo: что-то еще можно протестить? нужно тестить сортировку подробнее?
 });
