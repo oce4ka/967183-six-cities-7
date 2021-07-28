@@ -57,7 +57,6 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  //isUserLoggedIn: PropTypes.bool,
   authorizationStatus: PropTypes.string.isRequired,
   onLogOut: PropTypes.func.isRequired,
   onErrorIsAppeared: PropTypes.func.isRequired,

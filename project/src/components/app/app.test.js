@@ -17,7 +17,7 @@ describe('Application Routing', () => {
   beforeAll(() => {
     history = createMemoryHistory();
 
-    /* Mocks */
+    // Mocks
     const offer = {
       "bedrooms": 3,
       "city": {
