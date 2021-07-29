@@ -14,7 +14,6 @@ export const AppRoute = {
   LOGIN: '/login',
   FAVORITES: '/favorites',
   OFFER: '/offer/:id',
-  CITYPLACE: '/:cityplace',
   ROOT: '/',
   PAGE404: '/404',
   LOGOUT: '/logout',

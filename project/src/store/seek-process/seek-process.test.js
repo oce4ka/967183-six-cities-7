@@ -25,7 +25,7 @@ describe('Reducer: seekProcess', () => {
 
     const changeAnotherCityAction = {
       type: ActionType.CHANGE_CITY,
-      payload: 'Paris'
+      payload: 'Paris',
     };
 
     expect(seekProcess(state, changeAnotherCityAction))

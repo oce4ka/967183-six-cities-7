@@ -5,7 +5,7 @@ import {Router, Switch, Route} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import Header from './header';
 import userEvent from '@testing-library/user-event';
-import configureStore from "redux-mock-store";
+import configureStore from 'redux-mock-store';
 
 let history;
 let store = null;
@@ -16,8 +16,8 @@ describe('Component: Header', () => {
     const createFakeStore = configureStore({});
     store = createFakeStore({
       USER: {
-        authorizationStatus: "UNKNOWN",
-        authInfo: {}
+        authorizationStatus: 'UNKNOWN',
+        authInfo: {},
       },
       SEEK: {
         city: 'Paris',
@@ -59,5 +59,5 @@ describe('Component: Header', () => {
     userEvent.click(screen.getByTestId('logo'));
     expect(screen.queryByText(/This is main page/i)).toBeInTheDocument();
   });
-}
+},
 );

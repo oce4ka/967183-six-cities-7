@@ -7,174 +7,174 @@ describe('Hook: useOffersSorting', () => {
   beforeAll(() => {
     offers = [
       {
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
+        'bedrooms': 3,
+        'city': {
+          'location': {
+            'latitude': 52.370216,
+            'longitude': 4.895168,
+            'zoom': 10,
           },
-          "name": "Amsterdam"
+          'name': 'Amsterdam',
         },
-        "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
-        "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
-        "host": {
-          "avatarUrl": "img/1.png",
-          "id": 3,
-          "isPro": true,
-          "name": "Angelina"
+        'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+        'host': {
+          'avatarUrl': 'img/1.png',
+          'id': 3,
+          'isPro': true,
+          'name': 'Angelina',
         },
-        "id": 1,
-        "images": ["img/1.png", "img/2.png"],
-        "isFavorite": false,
-        "isPremium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
+        'id': 1,
+        'images': ['img/1.png', 'img/2.png'],
+        'isFavorite': false,
+        'isPremium': false,
+        'location': {
+          'latitude': 52.35514938496378,
+          'longitude': 4.673877537499948,
+          'zoom': 8,
         },
-        "maxAdults": 4,
-        "previewImage": "img/1.png",
-        "price": 120,
-        "rating": 4.8,
-        "title": "Beautiful & luxurious studio at great location",
-        "type": "apartment"
+        'maxAdults': 4,
+        'previewImage': 'img/1.png',
+        'price': 120,
+        'rating': 4.8,
+        'title': 'Beautiful & luxurious studio at great location',
+        'type': 'apartment',
       },
       {
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
+        'bedrooms': 3,
+        'city': {
+          'location': {
+            'latitude': 52.370216,
+            'longitude': 4.895168,
+            'zoom': 10,
           },
-          "name": "Amsterdam"
+          'name': 'Amsterdam',
         },
-        "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
-        "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
-        "host": {
-          "avatarUrl": "img/1.png",
-          "id": 3,
-          "isPro": true,
-          "name": "Angelina"
+        'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+        'host': {
+          'avatarUrl': 'img/1.png',
+          'id': 3,
+          'isPro': true,
+          'name': 'Angelina',
         },
-        "id": 2,
-        "images": ["img/1.png", "img/2.png"],
-        "isFavorite": false,
-        "isPremium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
+        'id': 2,
+        'images': ['img/1.png', 'img/2.png'],
+        'isFavorite': false,
+        'isPremium': false,
+        'location': {
+          'latitude': 52.35514938496378,
+          'longitude': 4.673877537499948,
+          'zoom': 8,
         },
-        "maxAdults": 4,
-        "previewImage": "img/1.png",
-        "price": 120,
-        "rating": 4.8,
-        "title": "Beautiful & luxurious studio at great location",
-        "type": "apartment"
+        'maxAdults': 4,
+        'previewImage': 'img/1.png',
+        'price': 120,
+        'rating': 4.8,
+        'title': 'Beautiful & luxurious studio at great location',
+        'type': 'apartment',
       },
       {
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
+        'bedrooms': 3,
+        'city': {
+          'location': {
+            'latitude': 52.370216,
+            'longitude': 4.895168,
+            'zoom': 10,
           },
-          "name": "Amsterdam"
+          'name': 'Amsterdam',
         },
-        "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
-        "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
-        "host": {
-          "avatarUrl": "img/1.png",
-          "id": 3,
-          "isPro": true,
-          "name": "Angelina"
+        'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+        'host': {
+          'avatarUrl': 'img/1.png',
+          'id': 3,
+          'isPro': true,
+          'name': 'Angelina',
         },
-        "id": 3,
-        "images": ["img/1.png", "img/2.png"],
-        "isFavorite": false,
-        "isPremium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
+        'id': 3,
+        'images': ['img/1.png', 'img/2.png'],
+        'isFavorite': false,
+        'isPremium': false,
+        'location': {
+          'latitude': 52.35514938496378,
+          'longitude': 4.673877537499948,
+          'zoom': 8,
         },
-        "maxAdults": 4,
-        "previewImage": "img/1.png",
-        "price": 120,
-        "rating": 4.8,
-        "title": "Beautiful & luxurious studio at great location",
-        "type": "apartment"
+        'maxAdults': 4,
+        'previewImage': 'img/1.png',
+        'price': 120,
+        'rating': 4.8,
+        'title': 'Beautiful & luxurious studio at great location',
+        'type': 'apartment',
       },
       {
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
+        'bedrooms': 3,
+        'city': {
+          'location': {
+            'latitude': 52.370216,
+            'longitude': 4.895168,
+            'zoom': 10,
           },
-          "name": "Paris"
+          'name': 'Paris',
         },
-        "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
-        "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
-        "host": {
-          "avatarUrl": "img/1.png",
-          "id": 3,
-          "isPro": true,
-          "name": "Angelina"
+        'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+        'host': {
+          'avatarUrl': 'img/1.png',
+          'id': 3,
+          'isPro': true,
+          'name': 'Angelina',
         },
-        "id": 4,
-        "images": ["img/1.png", "img/2.png"],
-        "isFavorite": false,
-        "isPremium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
+        'id': 4,
+        'images': ['img/1.png', 'img/2.png'],
+        'isFavorite': false,
+        'isPremium': false,
+        'location': {
+          'latitude': 52.35514938496378,
+          'longitude': 4.673877537499948,
+          'zoom': 8,
         },
-        "maxAdults": 4,
-        "previewImage": "img/1.png",
-        "price": 120,
-        "rating": 4.8,
-        "title": "Beautiful & luxurious studio at great location",
-        "type": "apartment"
+        'maxAdults': 4,
+        'previewImage': 'img/1.png',
+        'price': 120,
+        'rating': 4.8,
+        'title': 'Beautiful & luxurious studio at great location',
+        'type': 'apartment',
       },
       {
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
+        'bedrooms': 3,
+        'city': {
+          'location': {
+            'latitude': 52.370216,
+            'longitude': 4.895168,
+            'zoom': 10,
           },
-          "name": "Paris"
+          'name': 'Paris',
         },
-        "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
-        "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
-        "host": {
-          "avatarUrl": "img/1.png",
-          "id": 3,
-          "isPro": true,
-          "name": "Angelina"
+        'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+        'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+        'host': {
+          'avatarUrl': 'img/1.png',
+          'id': 3,
+          'isPro': true,
+          'name': 'Angelina',
         },
-        "id": 5,
-        "images": ["img/1.png", "img/2.png"],
-        "isFavorite": false,
-        "isPremium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
+        'id': 5,
+        'images': ['img/1.png', 'img/2.png'],
+        'isFavorite': false,
+        'isPremium': false,
+        'location': {
+          'latitude': 52.35514938496378,
+          'longitude': 4.673877537499948,
+          'zoom': 8,
         },
-        "maxAdults": 4,
-        "previewImage": "img/1.png",
-        "price": 120,
-        "rating": 4.8,
-        "title": "Beautiful & luxurious studio at great location",
-        "type": "apartment"
+        'maxAdults': 4,
+        'previewImage': 'img/1.png',
+        'price': 120,
+        'rating': 4.8,
+        'title': 'Beautiful & luxurious studio at great location',
+        'type': 'apartment',
       },
     ];
   });
@@ -188,7 +188,7 @@ describe('Hook: useOffersSorting', () => {
 
     expect(result.current).toHaveLength(1);
     expect(offersArraySorted).toBeInstanceOf(Array);
-    expect(typeof sortingPayload).toBe('string')
+    expect(typeof sortingPayload).toBe('string');
     expect(changeSortingPayload).toBeInstanceOf(Function);
   });
 
@@ -198,15 +198,12 @@ describe('Hook: useOffersSorting', () => {
     );
 
     const [{offersArraySorted, sortingPayload, changeSortingPayload}] = result.current;
-    const initialSortingPayload = sortingPayload;
     act(() => changeSortingPayload(SortOffersOptions.PRICE_DESCENDING));
 
-    const [{offersArraySorted: offersArraySorted1, sortingPayload: sortingPayload1, changeSortingPayload: changeSortingPayload1}] = result.current;
+    const [{offersArraySorted: offersArraySortedNew, sortingPayload: sortingPayloadNew}] = result.current;
     expect(sortingPayload).toStrictEqual(SortOffersOptions.POPULAR);
-    expect(sortingPayload1).toStrictEqual(SortOffersOptions.PRICE_DESCENDING);
+    expect(sortingPayloadNew).toStrictEqual(SortOffersOptions.PRICE_DESCENDING);
     expect(offersArraySorted).toStrictEqual(offers);
-    expect(offersArraySorted1).not.toBe(offers);
+    expect(offersArraySortedNew).not.toBe(offers);
   });
-
-  // todo: что-то еще можно протестить? нужно тестить сортировку подробнее?
 });

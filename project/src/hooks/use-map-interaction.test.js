@@ -1,7 +1,5 @@
 import {renderHook, act} from '@testing-library/react-hooks';
 import useMapInteraction from './use-map-interaction';
-import useOffersSorting from "./use-offers-sorting";
-import {SortOffersOptions} from "../const";
 
 let activePlaceIdInitial, activeMarkerIdInitial = null;
 describe('Hook: useMapInteraction', () => {
@@ -20,9 +18,9 @@ describe('Hook: useMapInteraction', () => {
     expect(result.current).toHaveLength(1);
     expect(result.current).toBeInstanceOf(Object);
 
-    expect(typeof activeMarkerId).toBe('number')
+    expect(typeof activeMarkerId).toBe('number');
     expect(setActiveMarker).toBeInstanceOf(Function);
-    expect(typeof activePlaceId).toBe('number')
+    expect(typeof activePlaceId).toBe('number');
     expect(setActivePlace).toBeInstanceOf(Function);
   });
 

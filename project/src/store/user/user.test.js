@@ -1,5 +1,5 @@
 import {user} from './user';
-import {ActionType, logout, setAuthorizationData} from '../action';
+import {ActionType} from '../action';
 import {AuthorizationStatus} from '../../const';
 
 describe('Reducer: user', () => {
@@ -55,7 +55,7 @@ describe('Reducer: user', () => {
 
     const logoutAction = {
       type: ActionType.SET_AUTHORIZATION_DATA,
-      payload: {name: 'Mark', is_pro: false},
+      payload: {name: 'Mark', 'is_pro': false},
     };
 
     expect(user(state, logoutAction))

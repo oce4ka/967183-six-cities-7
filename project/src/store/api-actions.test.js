@@ -12,7 +12,7 @@ import {
   addReview,
   login,
   checkAuth,
-  logout,
+  logout
 } from './api-actions';
 import {APIRoute, AppRoute} from '../const';
 
@@ -187,7 +187,7 @@ describe('Async operations', () => {
       });
   });
 
-  it('should make a correct API call to GET /offer ', () => {
+  it('should make a correct API call to GET /offer', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const currentOfferId = 10;
@@ -233,7 +233,7 @@ describe('Async operations', () => {
       });
   });
 
-  it('should make a correct API call to GET /hotels/: hotel_id/nearby ', () => {
+  it('should make a correct API call to GET /hotels/: hotel_id/nearby', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const currentOfferId = 10;
@@ -275,7 +275,7 @@ describe('Async operations', () => {
       });
   });
 
-  it('should make a correct API call to GET /comments/: hotel_id ', () => {
+  it('should make a correct API call to GET /comments/: hotel_id', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const currentOfferId = 10;
@@ -296,7 +296,7 @@ describe('Async operations', () => {
       });
   });
 
-  it('should make a correct API call to POST /comments/: hotel_id ', () => {
+  it('should make a correct API call to POST /comments/: hotel_id', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const currentOfferId = 13;

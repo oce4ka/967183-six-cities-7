@@ -17,8 +17,8 @@ describe('Component: Page404Screen', () => {
 
     store = createFakeStore({
       USER: {
-        authorizationStatus: "UNKNOWN",
-        authInfo: {}
+        authorizationStatus: 'UNKNOWN',
+        authInfo: {},
       },
       SEEK: {
         errorText: '',
@@ -33,7 +33,7 @@ describe('Component: Page404Screen', () => {
         <Router history={history}>
           <Page404Screen/>
         </Router>
-      </Provider>
+      </Provider>,
     );
 
     const headerElement = getAllByText('404. Not Found.');

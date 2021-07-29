@@ -19,8 +19,8 @@ describe('Component: LoginScreen', () => {
 
     store = createFakeStore({
       USER: {
-        authorizationStatus: "UNKNOWN",
-        authInfo: {}
+        authorizationStatus: 'UNKNOWN',
+        authInfo: {},
       },
       SEEK: {
         errorText: '',
