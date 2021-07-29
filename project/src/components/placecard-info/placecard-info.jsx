@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../offer-screen/offer.prop';
 import {Link} from 'react-router-dom';
-import convertRaitingToStars from '../../utils/convert-raiting-to-stars';
+import convertRatingToStars from '../../utils/convert-rating-to-stars';
 import useAddToFavorites from '../../hooks/use-add-to-favorites';
 import {TypesOfProperty} from '../../const';
 
@@ -27,7 +27,7 @@ function PlacecardInfo(props) {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${convertRaitingToStars(offer.rating)}%`}}></span>
+          <span style={{width: `${convertRatingToStars(offer.rating)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import convertRaitingToPercent from '../../utils/convert-raiting-to-percent';
+import convertRatingToPercent from '../../utils/convert-rating-to-percent';
 import PropTypes from 'prop-types';
 import offerProp from '../offer-screen/offer.prop';
 import useAddToFavorites from '../../hooks/use-add-to-favorites';
@@ -26,7 +26,7 @@ function OfferPropertyInfo(props) {
       </div>
       <div className="property__rating rating">
         <div className="property__stars rating__stars">
-          <span style={{width: `${convertRaitingToPercent(offer.rating)}%`}}></span>
+          <span style={{width: `${convertRatingToPercent(offer.rating)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
         <span className="property__rating-value rating__value">{offer.rating}</span>
