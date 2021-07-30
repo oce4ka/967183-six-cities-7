@@ -4,7 +4,7 @@ import offerProp from '../offer-screen/offer.prop';
 import {Link} from 'react-router-dom';
 import convertRatingToStars from '../../utils/convert-rating-to-stars';
 import useAddToFavorites from '../../hooks/use-add-to-favorites';
-import {TypesOfProperty} from '../../const';
+import getTypeOfProperty from '../../utils/get-type-of-property';
 
 function PlacecardInfo(props) {
   const {offer, className = ''} = props;
@@ -34,7 +34,7 @@ function PlacecardInfo(props) {
       <h2 className="place-card__name">
         <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
       </h2>
-      <p className="place-card__type">{TypesOfProperty[offer.type]}</p>
+      <p className="place-card__type">{getTypeOfProperty(offer.type)}</p>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import convertRatingToPercent from '../../utils/convert-rating-to-percent';
 import PropTypes from 'prop-types';
 import offerProp from '../offer-screen/offer.prop';
 import useAddToFavorites from '../../hooks/use-add-to-favorites';
-import {TypesOfProperty} from '../../const';
+import getTypeOfProperty from '../../utils/get-type-of-property';
 
 function OfferPropertyInfo(props) {
   const {offer} = props;
@@ -33,7 +33,7 @@ function OfferPropertyInfo(props) {
       </div>
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
-          {TypesOfProperty[offer.type]}
+          {getTypeOfProperty(offer.type)}
         </li>
         <li className="property__feature property__feature--bedrooms">
           {offer.bedrooms} Bedrooms

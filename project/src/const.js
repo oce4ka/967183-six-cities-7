@@ -37,10 +37,10 @@ export const AuthorizationStatus = {
 };
 
 export const TypesOfProperty = {
-  'apartment': 'Apartment',
-  'room': 'Private Room',
-  'house': 'House',
-  'hotel': 'Hotel',
+  APARTMENT: 'Apartment',
+  ROOM: 'Private Room',
+  HOUSE: 'House',
+  HOTEL: 'Hotel',
 };
 
 export const SortOffersOptions = {
