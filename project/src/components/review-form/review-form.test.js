@@ -2,15 +2,14 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import {Provider} from 'react-redux';
+import userEvent from '@testing-library/user-event';
+import ReviewForm from './review-form';
 import {AppRoute} from '../../const';
-import App from './app';
-import * as Redux from 'react-redux';
 
 let history = null;
 let store = null;
-let fakeApp = null;
 
 // Mocks
 const offer = {
@@ -246,7 +245,7 @@ const reviews = [
   },
 ];
 
-describe('Application Routing', () => {
+describe('Component: ReviewForm', () => {
   beforeAll(() => {
     history = createMemoryHistory();
 
@@ -276,148 +275,69 @@ describe('Application Routing', () => {
         isOffersFavoritesLoaded: false,
       },
     });
+  });
 
-    Object.defineProperty(window, 'scrollTo', {value: jest.fn(), writable: true});
+  it('should render "ReviewForm" correctly when user navigate to "offer" url', () => {
+    history.push(AppRoute.OFFER);
 
-    fakeApp = (
+    const {container} = render(
       <Provider store={store}>
         <Router history={history}>
-          <App/>
+          <ReviewForm/>
         </Router>
-      </Provider>
+      </Provider>,
     );
+
+    expect(screen.getByText(/Your review/i)).toBeInTheDocument();
+    expect(container.querySelector('.form__rating-input')).toBeInTheDocument();
+    expect(screen.getAllByRole('radio')).toHaveLength(5);
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  it('should render "HomepageScreen" when user navigate to "/"', () => {
-    history.push(AppRoute.ROOT);
-    render(fakeApp);
+  it('should type when user fills the form', () => {
+    history.push(AppRoute.OFFER);
 
-    expect(screen.getByText(/2 places to stay in Paris/i)).toBeInTheDocument();
-    expect(screen.getByText(/Sort by/i)).toBeInTheDocument();
-  });
-
-  it('should render "Offer" when user navigate to "/offer"', () => {
-    const dispatch = jest.fn();
-    const useDispatch = jest.spyOn(Redux, 'useDispatch');
-    useDispatch.mockReturnValue(dispatch);
-    history.push(AppRoute.OFFER.replace(':id', 1));
-    render(fakeApp);
-
-    expect(screen.getByText(/What's inside/i)).toBeInTheDocument();
-    expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
-    expect(screen.getByText(/Reviews/i)).toBeInTheDocument();
-    expect(screen.getByText(/Other places in the neighbourhood/i)).toBeInTheDocument();
-  });
-
-  it('should render "LoginScreen" when user navigate to "/login"', () => {
-    history.push(AppRoute.LOGIN);
-    render(fakeApp);
-
-    expect(screen.getAllByText(/Sign in/i)).toHaveLength(3);
-    expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
-  });
-
-  it('should render "LoginScreen" when unknown status user navigate to /favorites', () => {
-    history.push(AppRoute.FAVORITES);
-    render(fakeApp);
-
-    expect(screen.getAllByText(/Sign in/i)).toHaveLength(3);
-    expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
-  });
-
-  it('should render "LoginScreen" when not logged in user navigate to /favorites', () => {
-    const createFakeStore = configureStore({});
-    store = createFakeStore({
-      USER: {
-        authorizationStatus: 'NO_AUTH',
-        authInfo: {},
-      },
-      REVIEW: {
-        reviews: reviews,
-        isReviewsLoaded: true,
-      },
-      SEEK: {
-        city: 'Paris',
-        errorText: '',
-      },
-      OFFER: {
-        offers: offers,
-        isDataLoaded: true,
-        offer: offer,
-        isOfferLoaded: true,
-        offersNearby: offers,
-        isOffersNearbyLoaded: true,
-        offersFavorites: [],
-        isOffersFavoritesLoaded: false,
-      },
-    });
-
-    fakeApp = (
+    render(
       <Provider store={store}>
         <Router history={history}>
-          <App/>
+          <ReviewForm/>
         </Router>
-      </Provider>
+      </Provider>,
     );
 
-    history.push(AppRoute.FAVORITES);
-    render(fakeApp);
-
-    expect(screen.getAllByText(/Sign in/i)).toHaveLength(3);
-    expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Tell how was your stay, what you like and what can be improved/i)).toBeInTheDocument();
+    userEvent.type(screen.getByTestId('reviewTextarea'), 'Bla bla bla');
+    expect(screen.getByDisplayValue(/Bla bla bla/i)).toBeInTheDocument();
   });
 
-  it('should render "FavoritesScreen" when user navigate to /favorites', () => {
-    const createFakeStore = configureStore({});
-    store = createFakeStore({
-      USER: {
-        authorizationStatus: 'AUTH',
-        authInfo: {},
-      },
-      REVIEW: {
-        reviews: reviews,
-        isReviewsLoaded: true,
-      },
-      SEEK: {
-        city: 'Paris',
-        errorText: '',
-      },
-      OFFER: {
-        offers: offers,
-        isDataLoaded: true,
-        offer: offer,
-        isOfferLoaded: true,
-        offersNearby: offers,
-        isOffersNearbyLoaded: true,
-        offersFavorites: [],
-        isOffersFavoritesLoaded: false,
-      },
-    });
+  it('should show disabled button when user writes less than minimum amount of symbols', () => {
+    history.push(AppRoute.OFFER);
 
-    fakeApp = (
+    render(
       <Provider store={store}>
         <Router history={history}>
-          <App/>
+          <ReviewForm/>
         </Router>
-      </Provider>
+      </Provider>,
     );
 
-    history.push(AppRoute.FAVORITES);
-    render(fakeApp);
-
-    expect(screen.getByText(/Nothing yet saved./i)).toBeInTheDocument();
-    expect(screen.getByText(/Save properties to narrow down search or plan your future trips./i)).toBeInTheDocument();
+    userEvent.type(screen.getByTestId('reviewTextarea'), 'Bla bla bla');
+    expect(screen.getByRole('button')).toHaveAttribute('disabled');
   });
 
-  it('should render "Page404Screen" when user navigate to non-existent route', () => {
-    history.push('/unknown');
-    render(fakeApp);
+  it('should show disabled button when user writes more than minimum amount of symbols', () => {
+    history.push(AppRoute.OFFER);
 
-    expect(screen.getAllByText('404. Not Found.')).toHaveLength(2);
-    expect(screen.getByText('Return home')).toBeInTheDocument();
-    expect(screen.getByText('Return back')).toBeInTheDocument();
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <ReviewForm/>
+        </Router>
+      </Provider>,
+    );
+
+    userEvent.type(screen.getByTestId('reviewTextarea'), 'Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla');
+    expect(screen.getByRole('button')).not.toHaveAttribute('disabled');
   });
 });

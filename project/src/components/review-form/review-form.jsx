@@ -55,7 +55,7 @@ function ReviewForm() {
             />
             <label htmlFor={`${index}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
               <svg className="form__star-image" width="37" height="33">
-                <use xlinkHref="#icon-star"></use>
+                <use xlinkHref="#icon-star" />
               </svg>
             </label>
           </React.Fragment>
@@ -67,6 +67,7 @@ function ReviewForm() {
         }}
         className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        data-testid="reviewTextarea"
         value={review.textReview}
       >
       </textarea>

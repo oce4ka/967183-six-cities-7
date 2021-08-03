@@ -1,6 +1,5 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
-import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
@@ -33,9 +32,7 @@ describe('Component: HomepageEmptyContent', () => {
 
     render(
       <Provider store={store}>
-        <Router history={history}>
-          <HomepageEmptyContent/>
-        </Router>
+        <HomepageEmptyContent/>
       </Provider>,
     );
   });
