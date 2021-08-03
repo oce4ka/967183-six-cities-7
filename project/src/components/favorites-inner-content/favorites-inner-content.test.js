@@ -5,8 +5,8 @@ import {Router, Switch, Route} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
-import FavoritesInnerContent from './favorites-inner-content';
 import {AppRoute} from '../../const.js';
+import FavoritesInnerContent from './favorites-inner-content';
 
 const mockStore = configureStore({});
 

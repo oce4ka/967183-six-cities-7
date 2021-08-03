@@ -5,8 +5,8 @@ import {Router, Switch, Route} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
-import FavoritesPlacecard from './favorites-placecard';
 import {AppRoute} from '../../const.js';
+import FavoritesPlacecard from './favorites-placecard';
 
 const mockStore = configureStore({});
 
@@ -14,7 +14,7 @@ let history;
 let store;
 let offerMock;
 
-describe('Component: FavoritesInnerContent', () => {
+describe('Component: FavoritesPlacecard', () => {
   beforeEach(() => {
     offerMock = {
       'bedrooms': 3,
